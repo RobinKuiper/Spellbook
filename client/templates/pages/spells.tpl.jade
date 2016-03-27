@@ -1,0 +1,42 @@
+.ui.column.grid
+    .row
+        .column
+            .ui.buttons
+                button#sortByLevelButton.ui.fluid.button Sort by Level
+                button#sortByNameButton.ui.fluid.button Sort by Name
+    .row
+        .column
+            #classDropdown.ui.dropdown
+                .text All Classes
+                i.dropdown.icon
+                .menu
+                    .item(data-value='all') All Classes
+                    each c in classes
+                        .item(data-value=c._id) #{c.name}
+            #levelDropdown.ui.dropdown
+                .text All Levels
+                i.dropdown.icon
+                .menu
+                    .item(data-value='all') All Levels
+                    .item Cantrip
+                    .item 1
+                    .item 2
+                    .item 3
+                    .item 4
+                    .item 5
+                    .item 6
+                    .item 7
+                    .item 8
+    .row
+        .column
+            .ui.divided.list
+                each spell in spells
+                    .item
+                        .right.floated.content
+                            button.ui.blue.icon.button
+                                i.plus.icon
+                        .left.floated.content
+                            .ui.blue.label #{spell.level}
+                        .content
+                            .header #{spell.name}
+                            .description #{spell.book.name}
