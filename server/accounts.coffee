@@ -1,3 +1,12 @@
+Accounts.onCreateUser (options, user) ->
+	if Meteor.users.find().count() == 0
+		Roles.addUsersToRoles user._id, ['admin'], 'default'
+
+	if options.profile
+		user.profile = options.profile
+
+	return user
+
 # SERVICES
 if inDevelopment
 	facebookServiceConfiguration =

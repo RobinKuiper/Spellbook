@@ -31,11 +31,14 @@ nav.ui.three.column.grid
 .ui.column.grid
     .row
         .column
-            #spells.ui.divided.list
-                each spell in spells
-                    a.item(href='/spell/#{spell.slug}')
-                        .left.floated.content
-                            .ui.blue.label= formatSmallLevel(spell.level)
-                        .content
-                            .header #{spell.name}
-                            .description #{spell.book.name}
+            if spells
+                #spells.ui.divided.list
+                    each spell in spells
+                        a.item(href='/spell/#{spell.slug}')
+                            .left.floated.content
+                                .ui.blue.label= formatSmallLevel(spell.level)
+                            .content
+                                .header #{spell.name}
+                                .description #{spell.book.name}
+            else
+                p You don't have any spells in your spellbook yet.
