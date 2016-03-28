@@ -6,7 +6,7 @@ Template.registerHelper 'getUsername', (userId) ->
 
 Template.registerHelper 'formatLevel', (level) ->
   switch level
-    when 0 then 'Cantrip:'
+    when 0 then 'Cantrip'
     when 1 then level + 'st level'
     when 2 then level + 'nd level'
     when 3 then level + 'rd level'

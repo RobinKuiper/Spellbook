@@ -5,7 +5,12 @@ FlowRouter.route '/',
   action: ->
     BlazeLayout.render 'mainLayout', { content: 'spells' }
 
-FlowRouter.route '/spell/:spellId',
+FlowRouter.route '/spells',
+  name: 'spells'
+  action: ->
+    BlazeLayout.render 'mainLayout', { content: 'spells' }
+
+FlowRouter.route '/spell/:spellSlug',
   name: 'showSpell'
   action: ->
     BlazeLayout.render 'mainLayout', { content: 'showSpell' }

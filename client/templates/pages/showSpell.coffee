@@ -1,9 +1,11 @@
 spellId = ''
 
 Template.showSpell.onCreated ->
-  spellId = FlowRouter.getParam('spellId')
-  if !Spell.findOne spellId
+  spellSlug = FlowRouter.getParam('spellSlug')
+  if !spell = Spell.findOne { slug: spellSlug }
     utils.back()
+  else
+    spellId = spell._id
 
 Template.showSpell.helpers
   spell: -> Spell.findOne spellId

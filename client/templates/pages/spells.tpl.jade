@@ -1,37 +1,39 @@
+nav.ui.two.column.grid
+    .column
+        button#allSpellsButton.ui.big.fluid.button All Spells
+    .column
+        button#mySpellsButton.ui.big.fluid.button My Spells
+nav.ui.three.column.grid
+    .column
+        button#classDropdown.ui.fluid.dropdown.button
+            .text All Classes
+            i.dropdown.icon
+            .menu
+                .item(data-value='all') All Classes
+                each c in classes
+                    .item(data-value=c._id) #{c.name}
+    .column
+        button#levelDropdown.ui.fluid.dropdown.button
+            .text All Levels
+            i.dropdown.icon
+            .menu
+                .item(data-value='all') All Levels
+                each level in levels
+                    .item(data-value=level)= formatLevel(level)
+    .column
+        button#sortDropdown.ui.fluid.dropdown.button
+            .text Sort: Name
+            i.dropdown.icon
+            .menu
+                .item(data-value='name') Sort: Name
+                .item(data-value='level') Sort: Level
+
 .ui.column.grid
-    .row
-        .column
-            .ui.buttons
-                button#sortByLevelButton.ui.fluid.button Sort by Level
-                button#sortByNameButton.ui.fluid.button Sort by Name
-    .row
-        .column
-            #classDropdown.ui.dropdown
-                .text All Classes
-                i.dropdown.icon
-                .menu
-                    .item(data-value='all') All Classes
-                    each c in classes
-                        .item(data-value=c._id) #{c.name}
-            #levelDropdown.ui.dropdown
-                .text All Levels
-                i.dropdown.icon
-                .menu
-                    .item(data-value='all') All Levels
-                    .item Cantrip
-                    .item 1
-                    .item 2
-                    .item 3
-                    .item 4
-                    .item 5
-                    .item 6
-                    .item 7
-                    .item 8
     .row
         .column
             #spells.ui.divided.list
                 each spell in spells
-                    a.item(id=spell._id)
+                    a.item(href='/spell/#{spell.slug}')
                         .left.floated.content
                             .ui.blue.label= formatSmallLevel(spell.level)
                         .content
