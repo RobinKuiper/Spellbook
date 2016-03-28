@@ -16,6 +16,12 @@ standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
+accounts-base
+accounts-facebook
+accounts-google
+accounts-twitter
+service-configuration
+
 mquandalle:jade
 stylus
 coffeescript
@@ -24,3 +30,5 @@ juliancwirko:s-alert
 reactive-var
 flemay:less-autoprefixer
 aldeed:collection2
+kadira:flow-router
+kadira:blaze-layout
