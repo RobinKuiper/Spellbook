@@ -1,8 +1,18 @@
 @Spell = new Mongo.Collection 'spells'
 @Class = new Mongo.Collection 'classes'
+@Spellbook = new Mongo.Collection 'spellbooks'
 @Character = new Mongo.Collection 'characters'
 
 schemas = {}
+
+schemas.Spellbook = new SimpleSchema
+  userId:
+    type: String
+  spellId:
+    type: String
+  prepared:
+    type: Boolean
+    defaultValue: false
 
 schemas.Class = new SimpleSchema
   name:
@@ -71,4 +81,10 @@ schemas.Character = new SimpleSchema
 
 Spell.attachSchema schemas.Spell
 Class.attachSchema schemas.Class
+Spellbook.attachSchema schemas.Spellbook
 Character.attachSchema schemas.Character
+
+Spellbook.allow
+  insert: (userId, doc) ->
+    console.log userId
+    console.log doc

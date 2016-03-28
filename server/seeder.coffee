@@ -41,7 +41,7 @@ classes = [
 
 classes.forEach (c) ->
   c.createdAt = new Date()
-  Class.upsert { name: c.name }, { $set: c }
+  Class.insert c
 
 Spell.remove {}
 
@@ -131,4 +131,4 @@ spells = [
 
 spells.forEach (spell) ->
   spell.createdAt = new Date()
-  Spell.upsert { name: spell.name }, { $set: spell }
+  Spell.insert spell

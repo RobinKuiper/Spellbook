@@ -3,3 +3,6 @@ Meteor.publish 'spells', ->
 
 Meteor.publish 'classes', ->
   Class.find {}
+
+Meteor.publish 'spellbook', ->
+  Spellbook.find { userId: @userId }
