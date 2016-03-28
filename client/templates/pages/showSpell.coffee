@@ -9,7 +9,9 @@ Template.showSpell.onCreated ->
 
 Template.showSpell.helpers
   spell: -> Spell.findOne spellId
-  inSpellbook: -> Spellbook.findOne { userId: Meteor.user()._id, spellId: spellId }
+  inSpellbook: ->
+    if Meteor.user()
+      Spellbook.findOne { userId: Meteor.user()._id, spellId: spellId }
 
 Template.showSpell.events
   'click #addButton': ->

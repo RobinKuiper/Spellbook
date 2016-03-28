@@ -14,3 +14,7 @@ Meteor.methods
         throw new Meteor.Error err
       else
         return result
+
+  addAdmin: ->
+    if Meteor.users.find().count() == 1
+      Roles.addUsersToRoles Meteor.user()._id, ['admin'], 'default'

@@ -92,6 +92,9 @@ Class.attachSchema schemas.Class
 Spellbook.attachSchema schemas.Spellbook
 Character.attachSchema schemas.Character
 
+Spell.allow
+  insert: (userId, doc) -> (Roles.userIsInRole userId, ['admin'], 'default')
+
 Spellbook.allow
   insert: (userId, doc) ->
     console.log userId
