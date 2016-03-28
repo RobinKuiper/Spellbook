@@ -33,4 +33,6 @@ Template.spells.events
     sortBy.set 'level'
   'click #sortByNameButton': ->
     sortBy.set 'name'
-  'click #levelDropdown .item': ->
+  'click #spells .item': (e) ->
+    spellId = $(e.currentTarget).attr('id')
+    FlowRouter.go '/spell/'+spellId

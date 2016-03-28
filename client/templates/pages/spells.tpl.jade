@@ -29,14 +29,11 @@
                     .item 8
     .row
         .column
-            .ui.divided.list
+            #spells.ui.divided.list
                 each spell in spells
-                    .item
-                        .right.floated.content
-                            button.ui.blue.icon.button
-                                i.plus.icon
+                    a.item(id=spell._id)
                         .left.floated.content
-                            .ui.blue.label #{spell.level}
+                            .ui.blue.label= formatSmallLevel(spell.level)
                         .content
                             .header #{spell.name}
                             .description #{spell.book.name}

@@ -1,0 +1,42 @@
+.ui.column.grid
+    .row
+        .column
+            .ui.header
+                | #{spell.name}
+                .sub.header
+                    = formatLevel(spell.level)
+                    | #{spell.school}
+    .row
+        .eight.wide.column
+            .ui.sub.header Casting Time
+            span #{spell.castingTime}
+
+        .eight.wide.column
+            .ui.sub.header Range
+            span #{spell.range}
+
+    .row
+        .eight.wide.column
+            .ui.sub.header Duration
+            span #{spell.duration}
+
+        .eight.wide.column
+            .ui.sub.header Components
+            .ui.list
+                each component in spell.components
+                    .item #{component}
+
+    .row
+        .column
+            .ui.sub.header Description:
+            p #{spell.descriptions.main}
+
+    .row
+        .column
+            .ui.sub.header At higher levels:
+            p #{spell.descriptions.level}
+
+unless inSpellbook
+    button#addButton.ui.fluid.blue.button Add to Spellbook
+else
+    button#removeButton.ui.fluid.red.button Remove from Spellbook
