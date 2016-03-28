@@ -3,16 +3,10 @@
 @Spellbook = new Mongo.Collection 'spellbooks'
 @Character = new Mongo.Collection 'characters'
 
-schemas = {}
+Class.friendlySlugs 'name'
+Spell.friendlySlugs 'name'
 
-schemas.Spellbook = new SimpleSchema
-  userId:
-    type: String
-  spellId:
-    type: String
-  prepared:
-    type: Boolean
-    defaultValue: false
+schemas = {}
 
 schemas.Class = new SimpleSchema
   name:
@@ -29,6 +23,9 @@ schemas.Spell = new SimpleSchema
   name:
     type: String
     label: 'Name'
+  slug:
+    type: String
+    optional: true
   version:
     type: Number
     defaultValue: 5
@@ -78,6 +75,17 @@ schemas.Character = new SimpleSchema
     defaultValue: @userId
   class:
     type: schemas.Class
+
+schemas.Spellbook = new SimpleSchema
+  userId:
+    type: String
+  spellId:
+    type: String
+  spell:
+    type: schemas.Spell
+  prepared:
+    type: Boolean
+    defaultValue: false
 
 Spell.attachSchema schemas.Spell
 Class.attachSchema schemas.Class
