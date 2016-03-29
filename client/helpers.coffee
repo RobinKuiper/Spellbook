@@ -1,6 +1,3 @@
-Meteor.startup ->
-  Session.set 'showSignUpModal', false
-
 Template.registerHelper 'getUsername', (userId) ->
   Meteor.users.findOne(userId).username
 
@@ -14,6 +11,17 @@ Template.registerHelper 'formatLevel', (level) ->
 
 Template.registerHelper 'formatSmallLevel', (level) ->
   return if level == 0 then 'c' else level
+
+Template.registerHelper 'formatRange', (range) ->
+  if range == 0
+    return 'Self'
+  else if range == 5
+    return 'Touch'
+  else if range == -1
+    return 'Sight'
+  else
+    return range + ' feet'
+
 
 @utils =
   back: ->
