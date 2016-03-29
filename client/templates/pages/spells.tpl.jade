@@ -12,6 +12,10 @@ nav.ui.three.column.grid
                 .item(data-value='all') All Classes
                 each c in classes
                     .item(data-value=c._id) #{c.name}
+
+        //#verbalCheckbox.ui.toggle.checkbox
+            input(type='checkbox' name='verbal')
+            label Verbal
     .column
         button#levelDropdown.ui.fluid.dropdown.button
             .text All Levels
@@ -20,6 +24,10 @@ nav.ui.three.column.grid
                 .item(data-value='all') All Levels
                 each level in levels
                     .item(data-value=level)= formatLevel(level)
+
+        //#somaticCheckbox.ui.toggle.checkbox
+            input(type='checkbox' name='somatic')
+            label Somatic
     .column
         button#sortDropdown.ui.fluid.dropdown.button
             .text Sort: Name
@@ -27,18 +35,22 @@ nav.ui.three.column.grid
             .menu
                 .item(data-value='name') Sort: Name
                 .item(data-value='level') Sort: Level
+                .item(data-value='range') Sort: Range
 
-.ui.column.grid
-    .row
-        .column
-            if spells
-                #spells.ui.divided.list
-                    each spell in spells
-                        a.item(href='/spell/#{spell.slug}')
-                            .left.floated.content
-                                .ui.blue.label= formatSmallLevel(spell.level)
-                            .content
-                                .header #{spell.name}
-                                .description #{spell.book.name}
-            else
-                p You don't have any spells in your spellbook yet.
+//+Paginator_UI spells
+
+if spells
+    #spells.ui.divided.very.relaxed.selection.list
+        each spell in spells
+            a.item(href='/spell/#{spell.slug}')
+                .left.floated.content
+                    .ui.blue.label= formatSmallLevel(spell.level)
+                .right.floated.content
+                    .ui.label #{spell.castingTime}
+                .content
+                    .header #{spell.name}
+                    .description #{spell.book.name}
+else
+    p You don't have any spells in your spellbook yet.
+
+//+Paginator_UI spells

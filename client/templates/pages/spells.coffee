@@ -2,7 +2,13 @@ sortBy = new ReactiveVar 'name'
 level = new ReactiveVar('')
 # C = class
 C = new ReactiveVar('')
+#verbal = new ReactiveVar true
+#somatic = new ReactiveVar true
 type = new ReactiveVar 'all'
+limit = new ReactiveVar 10
+
+Tracker.autorun ->
+  Meteor.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get()
 
 Template.spells.onRendered ->
   $('#levelDropdown').dropdown
@@ -17,9 +23,43 @@ Template.spells.onRendered ->
     onChange: (value) ->
       sortBy.set value
 
+  $(window).on 'scroll', (e) ->
+    if $(window).scrollTop() + $(window).height() == $(document).height()
+      limit.set limit.get()+10
+
+  ###
+    $('#verbalCheckbox').checkbox({
+      onChecked: ->
+        verbal.set true
+      onUnchecked: ->
+        verbal.set false
+    }).checkbox('set checked')
+    $('#somaticCheckbox').checkbox({
+      onChecked: ->
+        somatic.set true
+      onUnchecked: ->
+        somatic.set false
+    }).checkbox('set checked')
+  ###
+
 Template.spells.helpers
   classes: -> Class.find {}
+  #spells: -> spellPaginator.find {}, { itemsPerPage: 10 }
   spells: ->
+    if type.get() == 'my'
+      filter = { sort: {} }
+      filter.sort[sortBy.get()] = 1
+      spellbook = Spellbook.find {}, filter
+      spells = []
+      spellbook.forEach (spell) ->
+        spells.push spell.spell
+
+      return spells
+    else
+      filter = { sort: {} }
+      filter.sort[sortBy.get()] = 1
+      Spell.find {}, filter
+  spells2: ->
     if type.get() == 'my'
       select = {}
 
@@ -39,6 +79,7 @@ Template.spells.helpers
 
       return spells
     else
+      #components = []
       select = {}
       if level.get() != ''
         select.level = level.get()*1

@@ -1,3 +1,3 @@
-Meteor.subscribe 'spells'
+#Meteor.subscribe 'spells'
 Meteor.subscribe 'classes'
-Meteor.subscribe 'spellbook'
+#Meteor.subscribe 'spellbook'
