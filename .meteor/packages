@@ -35,7 +35,6 @@ kadira:blaze-layout
 # COLLECTIONS
 aldeed:collection2
 mongo                       # The database Meteor supports right now
-#hitchcott:paginator
 
 # UTILS
 reactive-var

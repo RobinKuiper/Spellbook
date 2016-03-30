@@ -23,7 +23,6 @@ Template.registerHelper 'formatRange', (range) ->
     return range + ' feet'
 
 
-@utils =
-  back: ->
+utils.back = ->
     route = if Session.get 'previousRoute' == '' then Settings.homeRoute else Session.get 'previousRoute'
     FlowRouter.go route

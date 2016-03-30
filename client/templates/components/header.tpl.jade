@@ -3,3 +3,10 @@ header.ui.huge.inverted.blue.menu
         a#backButton.item
             i.arrow.left.icon
     .header.item #{title}
+    if isHomeRoute
+        .right.menu
+            if showSearch
+                input#searchInput.item(type='text')
+            else
+                a#searchButton.item
+                    i.search.icon

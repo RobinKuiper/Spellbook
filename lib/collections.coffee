@@ -3,9 +3,6 @@
 @Spellbook = new Mongo.Collection 'spellbooks'
 @Character = new Mongo.Collection 'characters'
 
-#if Meteor.isClient
-#  @spellPaginator = new Paginator Spell
-
 Class.friendlySlugs 'name'
 Spell.friendlySlugs 'name'
 

@@ -1,5 +1,7 @@
-Meteor.publish 'spells', (skip, limit, level, c, sortBy) ->
+Meteor.publish 'spells', (skip, limit, level, c, sortBy, search) ->
   select = {}
+  if search != ''
+    select.name = { $regex: utils.RegExp.escape(search), $options: 'i' }
   if level != ''
     select.level = level*1
   if c != ''
@@ -16,8 +18,6 @@ Meteor.publish 'classes', ->
   Class.find {}
 
 Meteor.publish 'spellbook', (skip, limit, level, c, sortBy) ->
-  #Spellbook.find { userId: @userId }
-
   select = {}
 
   if level != ''

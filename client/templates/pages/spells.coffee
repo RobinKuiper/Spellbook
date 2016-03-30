@@ -6,10 +6,10 @@ C = new ReactiveVar('')
 #somatic = new ReactiveVar true
 type = new ReactiveVar 'all'
 limit = new ReactiveVar 10
-group = { done: [] }
+#group = { done: [] }
 
 Tracker.autorun ->
-  Meteor.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get()
+  Meteor.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
 
 Template.spells.onRendered ->
   $('#levelDropdown').dropdown
@@ -62,6 +62,7 @@ Template.spells.helpers
         group.done.push spell.level
         return spell.level
   spells: ->
+    #return spellIndex.search('ab').fetch()
     if type.get() == 'my'
       filter = { sort: {} }
       filter.sort[sortBy.get()] = 1
