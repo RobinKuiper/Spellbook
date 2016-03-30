@@ -1,4 +1,4 @@
-if Settings.firstRun
+if !Settings.firstRun
   Class.remove {}
 
   classes = [
@@ -990,4 +990,4 @@ If you target a nonmagical plant that isn’t a creature, such as a tree or shrub,
     spell.createdAt = new Date()
     Spell.insert spell
 
-  Setting.insert { name: 'firstRun', value: false }
+  #Setting.insert { name: 'firstRun', value: false }
