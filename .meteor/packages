@@ -45,5 +45,6 @@ mobile-experience           # Packages for a great mobile UX
     #fastclick
     #launch-screen
     #mobile-status-bar
+mystor:device-detection
 
 #juliancwirko:s-alert

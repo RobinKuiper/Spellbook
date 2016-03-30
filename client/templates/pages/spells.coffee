@@ -10,6 +10,10 @@ limit = new ReactiveVar 10
 
 Tracker.autorun ->
   Meteor.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
+  Meteor.subscribe 'spellbook', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
+
+Template.spells.onCreated ->
+  if Meteor.Device.isDesktop() then limit.set 20
 
 Template.spells.onRendered ->
   $('#levelDropdown').dropdown
