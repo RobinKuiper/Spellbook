@@ -6,7 +6,7 @@ header.ui.huge.inverted.blue.menu
     if isHomeRoute
         .right.menu
             if showSearch
-                input#searchInput.item(type='text')
+                input#searchInput.item(type='text' value=query)
             else
                 a#searchButton.item
                     i.search.icon
