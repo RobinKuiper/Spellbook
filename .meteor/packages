@@ -39,6 +39,7 @@ mongo                       # The database Meteor supports right now
 # UTILS
 reactive-var
 todda00:friendly-slugs
+juliancwirko:s-alert
 
 # MOBILE
 mobile-experience           # Packages for a great mobile UX
@@ -46,5 +47,3 @@ mobile-experience           # Packages for a great mobile UX
     #launch-screen
     #mobile-status-bar
 mystor:device-detection
-
-#juliancwirko:s-alert
