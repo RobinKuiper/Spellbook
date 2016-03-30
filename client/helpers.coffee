@@ -1,6 +1,9 @@
 Template.registerHelper 'getUsername', (userId) ->
   Meteor.users.findOne(userId).username
 
+Template.registerHelper 'count', (array) ->
+  return if array == undefined then 0 else array.length
+
 Template.registerHelper 'formatLevel', (level) ->
   switch level
     when 0 then 'Cantrip'

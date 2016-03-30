@@ -19,6 +19,19 @@ FlowRouter.route '/spell/:spellSlug',
   action: ->
     BlazeLayout.render 'mainLayout', { content: 'showSpell' }
 
+characterSection = FlowRouter.group
+  prefix: '/characters'
+
+characterSection.route '/mine',
+  name: 'characters'
+  action: ->
+    BlazeLayout.render 'mainLayout', { content: 'myCharacters' }
+
+characterSection.route '/add',
+  name: 'addCharacter'
+  action: ->
+    BlazeLayout.render 'mainLayout', { content: 'addCharacter' }
+
 adminSection = FlowRouter.group
   prefix: '/admin'
 

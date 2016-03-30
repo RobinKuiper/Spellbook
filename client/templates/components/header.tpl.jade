@@ -1,7 +1,10 @@
 header.ui.huge.inverted.blue.menu
-    unless isHomeRoute
+    if isBackRoute
         a#backButton.item
             i.arrow.left.icon
+    else
+        a#sidebarButton.item
+            i.sidebar.icon
     .header.item #{title}
     if isHomeRoute
         .right.menu
@@ -10,3 +13,8 @@ header.ui.huge.inverted.blue.menu
             else
                 a#searchButton.item
                     i.search.icon
+
+    if isCharactersRoute
+        .right.menu
+            a.item(href='/characters/add')
+                i.add.icon

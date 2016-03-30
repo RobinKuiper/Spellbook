@@ -7,8 +7,15 @@ head
     link(rel='apple-touch-icon' href='apple-touch-icon.png')
 
 template(name='mainLayout')
-    +header
+    +sAlert
 
-    +Template.dynamic(template=content)
+    #content
+
+        +sidebar
+
+        .pusher
+
+            +header
+            +Template.dynamic(template=content)
 
     +signUpModal

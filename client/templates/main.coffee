@@ -5,3 +5,10 @@ Tracker.autorun ->
     $('#signUpModal').modal({
       onHide: -> Session.set 'showSignUpModal', false
     }).modal 'show'
+
+Template.mainLayout.onRendered ->
+  $('.ui.sidebar')
+    .sidebar({
+      context: '#content'
+      transition: 'overlay'
+    })

@@ -1,0 +1,44 @@
+level = new ReactiveVar()
+C = new ReactiveVar()
+race = new ReactiveVar()
+
+Template.addCharacter.onRendered ->
+  $('#levelDropdown').dropdown
+    onChange: (value) ->
+      level.set value
+
+  $('#classDropdown').dropdown
+    onChange: (value) ->
+      C.set value
+
+  $('#raceDropdown').dropdown
+    onChange: (value) ->
+      race.set value
+
+Template.addCharacter.helpers
+  classes: -> Class.find {}
+  races: -> Race.find {}
+  levels: -> [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Template.addCharacter.events
+  'submit form': (e) ->
+    e.preventDefault()
+
+    if e.target.name.value == '' ||
+    race.get() == undefined || race.get() == '' ||
+    level.get() == undefined || level.get() == '' ||
+    C.get() == undefined || C.get() == ''
+      sAlert.error 'Please fill in all the fields.'
+    else
+      char =
+        name: e.target.name.value
+        level: level.get()
+        race: race.get()
+        class: C.get()
+
+      Meteor.call 'addCharacter', char, (err) ->
+        if err
+          sAlert.error err
+        else
+          FlowRouter.go '/characters/mine'
+

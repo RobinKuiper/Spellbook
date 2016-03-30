@@ -33,3 +33,9 @@ Meteor.publish 'spellbook', (skip, limit, level, c, sortBy, search) ->
 
 Meteor.publish 'classes', ->
   Class.find {}
+
+Meteor.publish 'races', ->
+  Race.find {}
+
+Meteor.publish 'characters', ->
+  Character.find {}

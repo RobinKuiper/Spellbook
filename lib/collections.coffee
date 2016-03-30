@@ -2,6 +2,7 @@
 @Class = new Mongo.Collection 'classes'
 @Spellbook = new Mongo.Collection 'spellbooks'
 @Character = new Mongo.Collection 'characters'
+@Race = new Mongo.Collection 'races'
 
 Class.friendlySlugs 'name'
 Spell.friendlySlugs 'name'
@@ -9,6 +10,17 @@ Spell.friendlySlugs 'name'
 schemas = {}
 
 schemas.Class = new SimpleSchema
+  name:
+    type: String
+    label: 'Name'
+  createdAt:
+    type: Date
+    defaultValue: new Date()
+  updatedAt:
+    type: Date
+    autoValue: -> new Date()
+
+schemas.Race = new SimpleSchema
   name:
     type: String
     label: 'Name'
@@ -72,12 +84,26 @@ schemas.Spell = new SimpleSchema
     autoValue: -> new Date()
 
 schemas.Character = new SimpleSchema
+  name:
+    type: String
   userId:
     type: String
-    allowedValues: [@userId]
-    defaultValue: @userId
   class:
-    type: schemas.Class
+    type: String
+  race:
+    type: String
+  level:
+    type: Number
+    allowedValues: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  spells:
+    type: [schemas.Spell]
+    optional: true
+  createdAt:
+    type: Date
+    defaultValue: new Date()
+  updatedAt:
+    type: Date
+    autoValue: -> new Date()
 
 schemas.Spellbook = new SimpleSchema
   userId:
@@ -94,6 +120,7 @@ Spell.attachSchema schemas.Spell
 Class.attachSchema schemas.Class
 Spellbook.attachSchema schemas.Spellbook
 Character.attachSchema schemas.Character
+Race.attachSchema schemas.Race
 
 Spell.allow
   insert: (userId, doc) -> (Roles.userIsInRole userId, ['admin'], 'default')
