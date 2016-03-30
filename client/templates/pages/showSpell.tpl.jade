@@ -1,42 +1,42 @@
-.ui.column.grid
-    .row
-        .column
-            .ui.header
-                | #{spell.name}
-                .sub.header
-                    = formatLevel(spell.level)
-                    | #{spell.school}
-    .row
-        .eight.wide.column
-            .ui.sub.header Casting Time
-            span #{spell.castingTime}
-
-        .eight.wide.column
-            .ui.sub.header Range
-            span= formatRange(spell.range)
-
-    .row
-        .eight.wide.column
-            .ui.sub.header Duration
-            span #{spell.duration}
-
-        .eight.wide.column
-            .ui.sub.header Components
+#showSpell.ui.container
+    .ui.raised.top.attached.segment
+        .ui.red.ribbon.label
+            = formatLevel(spell.level)
+            | #{spell.school}
+        span.ui.header #{spell.name}
+        .ui.top.attached.segment
             .ui.list
-                each component in spell.components
-                    .item #{component}
-
-    .row
-        .column
-            .ui.sub.header Description:
+                .item
+                    i.clock.icon
+                    .content Casting Time: #{spell.castingTime}
+                .item
+                    i.wifi.icon
+                    .content
+                        | Range:
+                        = formatRange(spell.range)
+                .item
+                    i.history.icon
+                    .content Duration: #{spell.duration}
+            .ui.divider
             p #{spell.descriptions.main}
+            if spell.descriptions.level
+                .ui.sub.header At Higher Levels
+                p #{spell.descriptions.level}
+            .ui.divider
+            .ui.small.horizontal.list
+                each component in spell.components
+                    .middle.aligned.item
+                        img.ui.mini.image(src='/images/#{component}.png')
+                        div #{component}
+                if spell.material
+                    .item
+                        .content
+                            .header Material
+                            .description #{spell.material}
+            .ui.divider
+            .ui.bottom.attached.label #{spell.book.name} #{spell.book.page}
 
-    .row
-        .column
-            .ui.sub.header At higher levels:
-            p #{spell.descriptions.level}
-
-unless inSpellbook
-    button#addButton.ui.fluid.blue.button Add to Spellbook
-else
-    button#removeButton.ui.fluid.red.button Remove from Spellbook
+    unless inSpellbook
+        #addButton.ui.bottom.attached.blue.button Add to Spellbook
+    else
+        #removeButton.ui.bottom.attached.red.button Remove from Spellbook

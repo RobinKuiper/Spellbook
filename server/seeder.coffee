@@ -74,7 +74,8 @@ if Settings.firstRun
       castingTime: '1 Action'
       range: 30
       duration: '8 Hours'
-      components: ['Verbal', 'Somatic', 'Material (a tiny strip of white cloth)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'A tiny strip of white cloth'
       classes: [
         Class.findOne({ name: 'Cleric' })._id
         Class.findOne({ name: 'Paladin' })._id
@@ -94,7 +95,8 @@ if Settings.firstRun
       castingTime: '1 Minute'
       range: 30
       duration: '8 Hours'
-      components: ['Verbal', 'Somatic', 'Material (a tiny bell and a piece of fine silver wire)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a tiny bell and a piece of fine silver wire'
       classes: [
         Class.findOne({ name: 'Ranger' })._id
         Class.findOne({ name: 'Wizard' })._id
@@ -132,7 +134,8 @@ if Settings.firstRun
       castingTime: '1 Action'
       range: 30
       duration: '24 Hours'
-      components: ['Verbal', 'Somatic', 'Material (a morsel of food)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a morsel of food'
       classes: [
         Class.findOne({ name: 'Bard' })._id
         Class.findOne({ name: 'Druid' })._id
@@ -153,7 +156,8 @@ if Settings.firstRun
       castingTime: '1 Action'
       range: 30
       duration: '24 Hours'
-      components: ['Verbal', 'Somatic', 'Material (a morsel of food)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a morsel of food'
       classes: [
         Class.findOne({ name: 'Bard' })._id
         Class.findOne({ name: 'Druid' })._id
@@ -192,7 +196,8 @@ if Settings.firstRun
       castingTime: '1 Minute'
       range: 10
       duration: 'Instanteneous'
-      components: ['Verbal', 'Somatic', 'Material (a drop of blood, a piece of flesh, and a pinch of bone dust)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a drop of blood, a piece of flesh, and a pinch of bone dust'
       classes: [
         Class.findOne({ name: 'Cleric' })._id
         Class.findOne({ name: 'Wizard' })._id
@@ -251,7 +256,8 @@ if Settings.firstRun
       castingTime: '1 Action'
       range: 0
       duration: 'Concentration, up to 1 hour'
-      components: ['Verbal', 'Somatic', 'Material (a pinch o f powdered iron or iron filings) ']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a pinch of powdered iron or iron filings'
       classes: [
         Class.findOne({ name: 'Cleric' })._id
         Class.findOne({ name: 'Wizard' })._id
@@ -270,7 +276,8 @@ if Settings.firstRun
       castingTime: '1 Hour'
       range: 60
       duration: '10 Days'
-      components: ['Verbal', 'Somatic', 'Material (either a lump o f alum soaked in vinegar for the antipathy effect or a drop o f honey for the sympathy effect)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'either a lump o f alum soaked in vinegar for the antipathy effect or a drop o f honey for the sympathy effect'
       classes: [
         Class.findOne({ name: 'Druid' })._id
         Class.findOne({ name: 'Wizard' })._id
@@ -300,7 +307,8 @@ A creature that successfully saves against this effect is immune to it for 1 min
       castingTime: '1 Action'
       range: 30
       duration: 'Concentration, up to 1 hour'
-      components: ['Verbal', 'Somatic', 'Material (a bit of bat fur)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a bit of bat fur'
       classes: [
         Class.findOne({ name: 'Wizard' })._id
       ]
@@ -345,7 +353,8 @@ Any creature or object entering the portal exits from the other portal as if the
       castingTime: '1 Action'
       range: 5
       duration: 'Until dispelled'
-      components: ['Verbal', 'Somatic', 'Material (gold dust worth at least 25 gp, which the spell consumes)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'gold dust worth at least 25 gp, which the spell consumes'
       classes: [
         Class.findOne({ name: 'Wizard' })._id
       ]
@@ -365,7 +374,8 @@ You and the creatures you designate when you cast this spell can open the object
       castingTime: '1 Action'
       range: 0
       duration: '1 Hour'
-      components: ['Verbal', 'Somatic', 'Material (a cup of water)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a cup of water'
       classes: [
         Class.findOne({ name: 'Warlock' })._id
       ]
@@ -405,7 +415,8 @@ Tendrils of dark energy erupt from you and batter all creatures within 10 feet o
       castingTime: '1 Hour'
       range: 10
       duration: 'Special'
-      components: ['Verbal', 'Somatic', 'Material (for each creature you affect with this spell, you must provide one jacinth worth at least 1,000 gp and one ornately carved bar o f silver worth at least 100 gp, all o f which the spell consumes)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'for each creature you affect with this spell, you must provide one jacinth worth at least 1,000 gp and one ornately carved bar o f silver worth at least 100 gp, all o f which the spell consumes'
       classes: [
         Class.findOne({ name: 'Cleric' })._id
         Class.findOne({ name: 'Warlock' })._id
@@ -432,7 +443,8 @@ The spell might also end early for you or one of your companions. A successful d
       castingTime: '1 Minute'
       range: 0
       duration: 'Instanteneous'
-      components: ['Verbal', 'Somatic', 'Material (specially marked sticks, bones, or similar tokens w orth at least 25 gp)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'specially marked sticks, bones, or similar tokens w orth at least 25 gp'
       classes: [
         Class.findOne({ name: 'Cleric' })._id
       ]
@@ -516,7 +528,8 @@ Until the spell ends, the aura moves with you, centered on you. You can use a bo
       castingTime: '8 Hours'
       range: 5
       duration: 'Instanteneous'
-      components: ['Verbal', 'Somatic', 'Material (an agate worth at least 1,000 gp, which the spell consumes)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'an agate worth at least 1,000 gp, which the spell consumes'
       classes: [
         Class.findOne({ name: 'Bard' })._id
         Class.findOne({ name: 'Druid' })._id
@@ -538,7 +551,8 @@ The awakened beast or plant is charmed by you for 30 days or until you and your 
       castingTime: '1 Action'
       range: 30
       duration: 'Concentration, up to 1 minute'
-      components: ['Verbal', 'Somatic', 'Material (a drop of blood)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a drop of blood'
       classes: [
         Class.findOne({ name: 'Bard' })._id
         Class.findOne({ name: 'Cleric' })._id
@@ -548,7 +562,8 @@ The awakened beast or plant is charmed by you for 30 days or until you and your 
         name: 'Player Hand Book'
         page: 216
       descriptions:
-        main: 'Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whener a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw. At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, you can target one aditional creature for each slot level above 1st.'
+        main: 'Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whener a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw.'
+        level: 'When you cast this spell using a spell slot of 2nd level or higher, you can target one aditional creature for each slot level above 1st.'
     }
     {
       name: "Banishing Smite"
@@ -575,7 +590,8 @@ The awakened beast or plant is charmed by you for 30 days or until you and your 
       castingTime: '1 Action'
       range: 60
       duration: 'Concentration, up to 1 minute'
-      components: ['Verbal', 'Somatic', 'Material (an item distasteful to the target)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'an item distasteful to the target'
       classes: [
         Class.findOne({ name: 'Cleric' })._id
         Class.findOne({ name: 'Paladin' })._id
@@ -600,7 +616,8 @@ If the spell ends before 1 minute has passed, the target reappears in the space 
       castingTime: '1 Action'
       range: 5
       duration: 'Concentration, up to 1 hour'
-      components: ['Verbal', 'Somatic', 'Material (a handful of oak bark)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a handful of oak bark'
       classes: [
         Class.findOne({ name: 'Druid' })._id
         Class.findOne({ name: 'Ranger' })._id
@@ -667,7 +684,8 @@ If the spell ends before 1 minute has passed, the target reappears in the space 
         name: 'Player Hand Book'
         page: 218
       descriptions:
-        main: 'You touch a creature, and that creature must succeed on a Wisdom saving throw or become cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options: ? Choose one ability score. While cursed, the target has disadvantage on ability checks and saving throws made with that ability score. ? While cursed, the target has disadvantage on attack rolls against you. ? While cursed, the target must make a Wisdom saving throw at the start of each of its turns. If it fails, it wastes its action that turn doing nothing. ? While the target is cursed, your attacks and spells deal an extra 1d8 necrotic damage to the target. A remove curse spell ends this effect. At the DM’s option, you may choose an alternative curse effect, but it should be no more powerful than those described above. The DM has final say on such a curse’s effect. At Higher Levels. If you cast this spell using a spell slot of 4th level or higher, the duration is concentration, up to 10 minutes. If you use a spell slot of 5th level or higher, the duration is 8 hours. If you use a spell slot of 7th level or higher, the duration is 24 hours. If you use a 9th level spell slot, the spell lasts until it is dispelled. Using a spell slot of 5th level or higher grants a duration that doesn’t require concentration.'
+        main: 'You touch a creature, and that creature must succeed on a Wisdom saving throw or become cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options: ? Choose one ability score. While cursed, the target has disadvantage on ability checks and saving throws made with that ability score. ? While cursed, the target has disadvantage on attack rolls against you. ? While cursed, the target must make a Wisdom saving throw at the start of each of its turns. If it fails, it wastes its action that turn doing nothing. ? While the target is cursed, your attacks and spells deal an extra 1d8 necrotic damage to the target. A remove curse spell ends this effect. At the DM’s option, you may choose an alternative curse effect, but it should be no more powerful than those described above. The DM has final say on such a curse’s effect.'
+        level: 'If you cast this spell using a spell slot of 4th level or higher, the duration is concentration, up to 10 minutes. If you use a spell slot of 5th level or higher, the duration is 8 hours. If you use a spell slot of 7th level or higher, the duration is 24 hours. If you use a 9th level spell slot, the spell lasts until it is dispelled. Using a spell slot of 5th level or higher grants a duration that doesn’t require concentration.'
     }
     {
       name: "Bigby’s Hand"
@@ -676,7 +694,8 @@ If the spell ends before 1 minute has passed, the target reappears in the space 
       castingTime: '1 Action'
       range: 120
       duration: 'Concentration, up to 1 minute'
-      components: ['Verbal', 'Somatic', 'Material (an eggshell and a snakeskin glove)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'an eggshell and a snakeskin glove'
       classes: [
         Class.findOne({ name: 'Wizard' })._id
       ]
@@ -734,7 +753,8 @@ If the spell ends before 1 minute has passed, the target reappears in the space 
       castingTime: '1 Action'
       range: 30
       duration: 'Concentration, up to 1 minute'
-      components: ['Verbal', 'Somatic', 'Material (a sprinkling of holy water)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a sprinkling of holy water'
       classes: [
         Class.findOne({ name: 'Cleric' })._id
         Class.findOne({ name: 'Paladin' })._id
@@ -915,7 +935,8 @@ If you target a nonmagical plant that isn’t a creature, such as a tree or shrub,
       range: 150
       duration: 'Instanteneous'
       castingTime: '1 Action'
-      components: ['Verbal', 'Somatic', 'Material (a bit of sponge)']
+      components: ['Verbal', 'Somatic', 'Material']
+      material: 'a bit of sponge'
       descriptions:
         main: ' Blaat '
         level: 'Kut'
@@ -956,7 +977,8 @@ If you target a nonmagical plant that isn’t a creature, such as a tree or shrub,
       range: 30
       duration: 'Instanteneous'
       castingTime: '1 Action'
-      components: ['Verbal', 'Somatic', "Material (a red dragon's scale)"]
+      components: ['Verbal', 'Somatic', "Material"]
+      material: "a red dragon's scale"
       descriptions:
         main: ' Blaat '
         level: 'Kut'

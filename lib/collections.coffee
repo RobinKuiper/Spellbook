@@ -52,6 +52,9 @@ schemas.Spell = new SimpleSchema
     type: String
   components:
     type: [String]
+  material:
+    type: String
+    optional: true
   descriptions:
     type: Object
   'descriptions.main':
