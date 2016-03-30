@@ -40,8 +40,12 @@ nav.ui.three.column.grid
 //+Paginator_UI spells
 
 if spells
+    #alphabetSidebar.ui.secondary.vertical.menu
+        each letter in letters
+            a.item(href='#'+letter) #{letter}
     #spells.ui.divided.very.relaxed.selection.list
         each spell in spells
+            //.ui.sub.header= group(spell)
             a.item(href='/spell/#{spell.slug}')
                 .left.floated.content
                     .ui.blue.label= formatSmallLevel(spell.level)

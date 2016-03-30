@@ -6,6 +6,7 @@ C = new ReactiveVar('')
 #somatic = new ReactiveVar true
 type = new ReactiveVar 'all'
 limit = new ReactiveVar 10
+group = { done: [] }
 
 Tracker.autorun ->
   Meteor.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get()
@@ -27,6 +28,11 @@ Template.spells.onRendered ->
     if $(window).scrollTop() + $(window).height() == $(document).height()
       limit.set limit.get()+10
 
+    #$('#alphabetSidebar').show()
+
+  #$(window).on 'touchstart touchmove mouseover click', '#alphabetSidebar a', (e) ->
+    # Code
+
   ###
     $('#verbalCheckbox').checkbox({
       onChecked: ->
@@ -45,6 +51,16 @@ Template.spells.onRendered ->
 Template.spells.helpers
   classes: -> Class.find {}
   #spells: -> spellPaginator.find {}, { itemsPerPage: 10 }
+  group: (spell) ->
+    if sortBy.get() == 'name'
+      firstLetter = spell.name.substring 0, 1
+      if group.done.indexOf(firstLetter) < 0
+        group.done.push firstLetter
+        return firstLetter
+    if sortBy.get() == 'level'
+      if group.done.indexOf(spell.level) < 0
+        group.done.push spell.level
+        return spell.level
   spells: ->
     if type.get() == 'my'
       filter = { sort: {} }
@@ -59,7 +75,8 @@ Template.spells.helpers
       filter = { sort: {} }
       filter.sort[sortBy.get()] = 1
       Spell.find {}, filter
-  spells2: ->
+  ###
+  spells: ->
     if type.get() == 'my'
       select = {}
 
@@ -89,7 +106,9 @@ Template.spells.helpers
       filter = { sort: {} }
       filter.sort[sortBy.get()] = 1
       Spell.find select, filter
+  ###
   levels: -> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  letters: -> 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split ''
 
 Template.spells.events
   'click #spells .item': (e) ->
