@@ -14,12 +14,10 @@ Meteor.publish 'spells', (skip, limit, level, c, sortBy, search) ->
   filter.sort[sortBy] = 1
   Spell.find select, filter
 
-Meteor.publish 'classes', ->
-  Class.find {}
-
-Meteor.publish 'spellbook', (skip, limit, level, c, sortBy) ->
+Meteor.publish 'spellbook', (skip, limit, level, c, sortBy, search) ->
   select = {}
-
+  if search != ''
+    select['spell.name'] = { $regex: utils.RegExp.escape(search), $options: 'i' }
   if level != ''
     select['spell.level'] = level*1
   if c != ''
@@ -32,3 +30,6 @@ Meteor.publish 'spellbook', (skip, limit, level, c, sortBy) ->
   filter.sort['spell.'+sortBy] = 1
 
   Spellbook.find select, filter
+
+Meteor.publish 'classes', ->
+  Class.find {}
