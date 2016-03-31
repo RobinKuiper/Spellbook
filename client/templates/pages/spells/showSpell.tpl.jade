@@ -36,7 +36,10 @@
             .ui.divider
             .ui.bottom.attached.label #{spell.book.name} #{spell.book.page}
 
-    unless inSpellbook
-        #addButton.ui.bottom.attached.blue.button Add to Spellbook
-    else
-        #removeButton.ui.bottom.attached.red.button Remove from Spellbook
+    #addButton.ui.bottom.attached.blue.button Add to Spellbook
+
+    if inSpellbook
+        p
+            | Spell is in the following spellbooks:
+            each character in inSpellbook
+                = character.name

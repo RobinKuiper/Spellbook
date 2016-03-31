@@ -1,8 +1,8 @@
 Meteor.methods
-  addSpell: (spellId) ->
-    if(!Spellbook.findOne { userId: @userId, spellId: spellId })
+  addSpell: (spellId, characterId) ->
+    if(!Spellbook.findOne { characterId: @userId, spellId: spellId })
       spell = Spell.findOne spellId
-      Spellbook.insert { userId: @userId, spellId: spellId, spell: spell }, (err, result) ->
+      Spellbook.insert { userId: @userId, characterId: characterId, spellId: spellId, spell: spell }, (err, result) ->
         if err
           throw new Meteor.Error err
         else

@@ -36,9 +36,15 @@ Template.addCharacter.events
         race: race.get()
         class: C.get()
 
-      Meteor.call 'addCharacter', char, (err) ->
+      Meteor.call 'addCharacter', char, (err, result) ->
         if err
           sAlert.error err
         else
-          FlowRouter.go '/characters/mine'
+          if Session.get('spellToAdd') != ''
+            Meteor.call 'addSpell', Session.get('spellToAdd'), result, (err, result) ->
+              if err
+                console.log err
+              else
+                Session.set 'spellToAdd', ''
+          FlowRouter.go '/characters/'+result+'/spells'
 

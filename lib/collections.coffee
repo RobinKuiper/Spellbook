@@ -108,6 +108,8 @@ schemas.Character = new SimpleSchema
 schemas.Spellbook = new SimpleSchema
   userId:
     type: String
+  characterId:
+    type: String
   spellId:
     type: String
   spell:
