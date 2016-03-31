@@ -10,9 +10,10 @@ limit = new ReactiveVar 10
 
 Tracker.autorun ->
   Meteor.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
-  Meteor.subscribe 'spellbook', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
+  #Meteor.subscribe 'spellbook', Session.get('characterId'), 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
 
 Template.spells.onCreated ->
+  Session.set 'characterId', if Character.findOne FlowRouter.getParam('characterId') then FlowRouter.getParam('characterId') else ''
   if Meteor.Device.isDesktop() then limit.set 20
 
 Template.spells.onRendered ->
@@ -30,6 +31,7 @@ Template.spells.onRendered ->
 
   $(window).on 'scroll', (e) ->
     if $(window).scrollTop() + $(window).height() == $(document).height()
+      console.log 'bottom'
       limit.set limit.get()+10
 
     #$('#alphabetSidebar').show()
@@ -55,6 +57,7 @@ Template.spells.onRendered ->
 Template.spells.helpers
   classes: -> Class.find {}
   #spells: -> spellPaginator.find {}, { itemsPerPage: 10 }
+  isCharacter: -> FlowRouter.getRouteName() == 'characterSpells'
   group: (spell) ->
     if sortBy.get() == 'name'
       firstLetter = spell.name.substring 0, 1
@@ -66,11 +69,17 @@ Template.spells.helpers
         group.done.push spell.level
         return spell.level
   spells: ->
-    #return spellIndex.search('ab').fetch()
-    if type.get() == 'my'
+    if Character.findOne Session.get 'characterId'
       filter = { sort: {} }
       filter.sort[sortBy.get()] = 1
-      spellbook = Spellbook.find {}, filter
+
+      select = {}
+      select.characterId = Session.get 'characterId'
+      if level.get() != ''
+        select['spell.level'] = level.get()*1
+      if C.get() != ''
+        select['spell.classes'] = C.get()
+      spellbook = Spellbook.find select, filter
       spells = []
       spellbook.forEach (spell) ->
         spells.push spell.spell
@@ -80,38 +89,6 @@ Template.spells.helpers
       filter = { sort: {} }
       filter.sort[sortBy.get()] = 1
       Spell.find {}, filter
-  ###
-  spells: ->
-    if type.get() == 'my'
-      select = {}
-
-      if level.get() != ''
-        select['spell.level'] = level.get()*1
-      if C.get() != ''
-        select['spell.classes'] = C.get()
-
-      filter = { sort: {} }
-      filter.sort['spell.'+sortBy.get()] = 1
-
-      spellbook = Spellbook.find select, filter
-
-      spells = []
-      spellbook.forEach (spell) ->
-        spells.push spell.spell
-
-      return spells
-    else
-      #components = []
-      select = {}
-      if level.get() != ''
-        select.level = level.get()*1
-      if C.get() != ''
-        select.classes = C.get()
-
-      filter = { sort: {} }
-      filter.sort[sortBy.get()] = 1
-      Spell.find select, filter
-  ###
   levels: -> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   letters: -> 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split ''
 

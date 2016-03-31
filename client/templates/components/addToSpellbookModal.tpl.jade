@@ -1,0 +1,16 @@
+#addToSpellbookModal.ui.modal
+    i.close.icon
+    .header Who's Spellbook
+    .content
+        .ui.selection.list
+            each character in characters
+                .item(id=character._id class=inSpellbook(character._id))
+                    .content
+                        .header #{character.name}
+                        .description
+                            = formatLevel(character.level)
+                            = character.race
+                            = character.class
+            #new.item
+                .content
+                    .header New Character

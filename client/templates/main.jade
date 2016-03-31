@@ -9,13 +9,13 @@ head
 template(name='mainLayout')
     +sAlert
 
-    #content
 
-        +sidebar
+    +sidebar
 
-        .pusher
+    .pusher
 
-            +header
-            +Template.dynamic(template=content)
+        +header
+        +Template.dynamic(template=content)
 
     +signUpModal
+    +addToSpellbookModal

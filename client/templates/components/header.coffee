@@ -3,7 +3,7 @@ Session.setDefault 'search', ''
 t = ''
 
 Template.header.helpers
-  title: -> FlowRouter.getRouteName().charAt(0).toUpperCase() + FlowRouter.getRouteName().slice(1) #Settings.title
+  title: -> Title[FlowRouter.getRouteName()] #FlowRouter.getRouteName().charAt(0).toUpperCase() + FlowRouter.getRouteName().slice(1) #Settings.title
   isHomeRoute: -> FlowRouter.getRouteName() == Settings.homeRoute
   isBackRoute: -> (FlowRouter.getRouteName() != Settings.homeRoute && FlowRouter.getRouteName() != 'characters')
   isCharactersRoute: -> FlowRouter.getRouteName() == 'characters'
@@ -11,6 +11,13 @@ Template.header.helpers
   query: -> Session.get 'search'
 
 Template.header.events
+  'click #addCharacterButton': (e) ->
+    e.preventDefault()
+
+    if Meteor.user()
+      FlowRouter.go '/characters/add'
+    else
+      Session.set 'showSignUpModal', true
   'click #backButton': -> utils.back()
   'click #sidebarButton': -> $('.ui.sidebar').sidebar('toggle')
   'click #searchButton': ->

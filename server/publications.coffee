@@ -14,8 +14,13 @@ Meteor.publish 'spells', (skip, limit, level, c, sortBy, search) ->
   filter.sort[sortBy] = 1
   Spell.find select, filter
 
-Meteor.publish 'spellbook', (skip, limit, level, c, sortBy, search) ->
+Meteor.publish 'spellbooks', ->
+  Spellbook.find { userId: @userId }
+
+Meteor.publish 'spellbook', (characterId, skip, limit, level, c, sortBy, search) ->
   select = {}
+  select.characterId = characterId
+  select.userId = @userId
   if search != ''
     select['spell.name'] = { $regex: utils.RegExp.escape(search), $options: 'i' }
   if level != ''
@@ -38,4 +43,4 @@ Meteor.publish 'races', ->
   Race.find {}
 
 Meteor.publish 'characters', ->
-  Character.find {}
+  Character.find { userId: @userId }
