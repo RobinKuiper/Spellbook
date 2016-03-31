@@ -32,6 +32,11 @@ characterSection.route '/add',
   action: ->
     BlazeLayout.render 'mainLayout', { content: 'addCharacter' }
 
+characterSection.route '/:characterId/spells',
+  name: 'characterSpells'
+  action: ->
+    BlazeLayout.render 'mainLayout', { content: 'spells' }
+
 adminSection = FlowRouter.group
   prefix: '/admin'
 
