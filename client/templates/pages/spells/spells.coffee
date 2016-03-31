@@ -17,6 +17,10 @@ Template.spells.onCreated ->
   if Meteor.Device.isDesktop() then limit.set 20
 
 Template.spells.onRendered ->
+  C.set ''
+  level.set ''
+  sortBy.set 'name'
+
   $('#levelDropdown').dropdown
     onChange: (value) ->
       level.set if value == 'all' then '' else value
