@@ -18,7 +18,7 @@ Template.addCharacter.onRendered ->
 Template.addCharacter.helpers
   classes: -> Class.find {}
   races: -> Race.find {}
-  levels: -> [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  levels: -> (num for num in [1..20])
 
 Template.addCharacter.events
   'submit form': (e) ->
