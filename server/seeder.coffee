@@ -1,3 +1,39 @@
+Race.remove {}
+
+races = [
+  {
+    name: 'Dwarf'
+  }
+  {
+    name: 'Elf'
+  }
+  {
+    name: 'Halfling'
+  }
+  {
+    name: 'Human'
+  }
+  {
+    name: 'Dragonborn'
+  }
+  {
+    name: 'Gnome'
+  }
+  {
+    name: 'Half-Elf'
+  }
+  {
+    name: 'Half-Orc'
+  }
+  {
+    name: 'Tiefling'
+  }
+]
+
+races.forEach (race) ->
+  race.createdAt = new Date()
+  Race.insert race
+
 if Settings.firstRun
   Class.remove {}
 
@@ -43,42 +79,6 @@ if Settings.firstRun
   classes.forEach (c) ->
     c.createdAt = new Date()
     Class.insert c
-
-  Race.remove {}
-
-  races = [
-    {
-      name: 'Dwarf'
-    }
-    {
-      name: 'Elf'
-    }
-    {
-      name: 'Halfling'
-    }
-    {
-      name: 'Human'
-    }
-    {
-      name: 'Dragonborn'
-    }
-    {
-      name: 'Gnome'
-    }
-    {
-      name: 'Half-Elf'
-    }
-    {
-      name: 'Half-Orc'
-    }
-    {
-      name: 'Tiefling'
-    }
-  ]
-
-  races.forEach (race) ->
-    race.createdAt = new Date()
-    Race.insert race
 
   Spell.remove {}
 
