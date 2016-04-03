@@ -39,6 +39,8 @@ mongo                       # The database Meteor supports right now
 reactive-var
 todda00:friendly-slugs
 juliancwirko:s-alert
+meteorhacks:kadira
+kadira:debug
 
 # MOBILE
 mobile-experience           # Packages for a great mobile UX
