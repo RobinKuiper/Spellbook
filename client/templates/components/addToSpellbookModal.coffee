@@ -3,7 +3,6 @@ spellSlug = new ReactiveVar()
 Tracker.autorun ->
   spellSlug.set FlowRouter.getParam('spellSlug')
 
-Template.addToSpellbookModal.onRendered ->
   $('#addToSpellbookModal .item').click (e) ->
     characterId = $(e.currentTarget).attr('id')
     spellId = Spell.findOne({ slug: spellSlug.get() })._id
@@ -12,6 +11,7 @@ Template.addToSpellbookModal.onRendered ->
       FlowRouter.go '/characters/add'
       $('#addToSpellbookModal').modal('hide')
     else
+
       Meteor.call 'addSpell', spellId, characterId, (err, result) ->
         if err
           console.log err
