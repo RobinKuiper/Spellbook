@@ -1,4 +1,7 @@
 Meteor.methods
+  log: (q) ->
+    console.log q
+
   addSpell: (spellId, characterId) ->
     if(!Spellbook.findOne { characterId: @userId, spellId: spellId })
       spell = Spell.findOne spellId
