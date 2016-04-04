@@ -33,3 +33,7 @@ Meteor.methods
           return result
     else
       throw new Meteor.Error 'Not allowed with this data.'
+
+  countSpells: -> Spell.find().count()
+  countCharacters: -> Character.find().count()
+  countUsers: -> Meteor.users.find().count()

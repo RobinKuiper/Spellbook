@@ -9,6 +9,11 @@ FlowRouter.route '/spells',
   action: ->
     FlowRouter.go '/'
 
+FlowRouter.route '/about',
+  name: 'about'
+  action: ->
+    BlazeLayout.render 'mainLayout', { content: 'about' }
+
 FlowRouter.route '/spell',
   action: ->
     FlowRouter.go '/'
