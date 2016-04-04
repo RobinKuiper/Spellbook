@@ -12,6 +12,15 @@ Tracker.autorun ->
   Meteor.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
   #Meteor.subscribe 'spellbook', Session.get('characterId'), 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
 
+Tracker.autorun ->
+  if FlowRouter.getRouteName() == 'home'
+    $(window).on 'scroll', (e) ->
+      if $(window).scrollTop() + $(window).height() == $(document).height()
+        console.log 'bottom'
+        limit.set limit.get()+10
+  else
+    $(window).unbind('scroll')
+
 Template.spells.onCreated ->
   Session.set 'characterId', if Character.findOne FlowRouter.getParam('characterId') then FlowRouter.getParam('characterId') else ''
 
@@ -31,11 +40,6 @@ Template.spells.onRendered ->
   $('#sortDropdown').dropdown
     onChange: (value) ->
       sortBy.set value
-
-  $(window).on 'scroll', (e) ->
-    if $(window).scrollTop() + $(window).height() == $(document).height()
-      console.log 'bottom'
-      limit.set limit.get()+10
 
     #$('#alphabetSidebar').show()
 
