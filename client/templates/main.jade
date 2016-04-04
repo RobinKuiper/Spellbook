@@ -34,4 +34,5 @@ template(name='mainLayout')
         +Template.dynamic(template=content)
 
     +signUpModal
-    +addToSpellbookModal
+    if showAddToSpellbookModal
+        +addToSpellbookModal
