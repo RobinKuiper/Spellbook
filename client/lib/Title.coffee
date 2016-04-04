@@ -5,3 +5,4 @@
   characters: 'Characters'
   addCharacter: 'Add Character'
   characterSpells: 'Spells'
+  about: 'About'
