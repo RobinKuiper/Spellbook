@@ -3,7 +3,7 @@
         each character in characters
             .item(id=character._id)
                 .right.floated.content
-                    .ui.label= count(character.spells)
+                    .ui.label= countSpells(character._id)
                 .content
                     .header #{character.name}
                     .description

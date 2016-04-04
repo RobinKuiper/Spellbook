@@ -2,6 +2,7 @@ Template.registerHelper 'getUsername', (userId) ->
   Meteor.users.findOne(userId).username
 
 Template.registerHelper 'count', (array) ->
+  console.log array
   return if array == undefined then 0 else array.length
 
 Template.registerHelper 'formatLevel', (level) ->
