@@ -3,6 +3,11 @@ spellSlug = new ReactiveVar()
 Tracker.autorun ->
   spellSlug.set FlowRouter.getParam('spellSlug')
 
+Template.addToSpellbookModal.onRendered ->
+  $('#addToSpellbookModal').modal({
+    onHide: -> Session.set 'showAddToSpellbookModal', false
+  }).modal 'show'
+
   $('#addToSpellbookModal .item').click (e) ->
     characterId = $(e.currentTarget).attr('id')
     spellId = Spell.findOne({ slug: spellSlug.get() })._id
