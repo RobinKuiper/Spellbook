@@ -6,9 +6,8 @@ FlowRouter.route '/',
     BlazeLayout.render 'mainLayout', { content: 'spells' }
 
 FlowRouter.route '/spells',
-  name: 'spells'
   action: ->
-    BlazeLayout.render 'mainLayout', { content: 'spells' }
+    FlowRouter.go '/'
 
 FlowRouter.route '/spell',
   action: ->
