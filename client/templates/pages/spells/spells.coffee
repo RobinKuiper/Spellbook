@@ -5,7 +5,7 @@ C = new ReactiveVar('')
 #verbal = new ReactiveVar true
 #somatic = new ReactiveVar true
 type = new ReactiveVar 'all'
-limit = new ReactiveVar 10
+limit = new ReactiveVar 50
 #group = { done: [] }
 
 Tracker.autorun ->
@@ -14,7 +14,6 @@ Tracker.autorun ->
 
 Template.spells.onCreated ->
   Session.set 'characterId', if Character.findOne FlowRouter.getParam('characterId') then FlowRouter.getParam('characterId') else ''
-  if Meteor.Device.isDesktop() then limit.set 20
 
 Template.spells.onRendered ->
   C.set ''
