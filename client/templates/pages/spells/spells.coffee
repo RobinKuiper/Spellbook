@@ -16,7 +16,7 @@ Tracker.autorun ->
   if FlowRouter.getRouteName() == 'home'
     $(window).on 'scroll', (e) ->
       if $(window).scrollTop() + $(window).height() == $(document).height()
-        limit.set limit.get()+10
+        limit.set limit.get()+50
   else
     $(window).unbind('scroll')
 
