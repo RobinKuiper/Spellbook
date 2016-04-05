@@ -16,7 +16,6 @@ Template.addToSpellbookModal.onRendered ->
       FlowRouter.go '/characters/add'
       $('#addToSpellbookModal').modal('hide')
     else
-
       Meteor.call 'addSpell', spellId, characterId, (err, result) ->
         if err
           console.log err
