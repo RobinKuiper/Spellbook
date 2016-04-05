@@ -18,7 +18,7 @@ Template.header.events
       FlowRouter.go '/characters/add'
     else
       Session.set 'showSignUpModal', true
-  'click #backButton': -> utils.back()
+  'click #backButton': -> history.back()
   'click #sidebarButton': -> $('.ui.sidebar').sidebar('toggle')
   'click #searchButton': ->
     showSearch.set true

@@ -50,4 +50,5 @@ adminSection.route '/spell/add',
     BlazeLayout.render 'adminLayout', { content: 'addSpell' }
 
 FlowRouter.triggers.exit ->
-  Session.set 'previousRoute', FlowRouter.getRouteName()
+  if FlowRouter.getRouteName() != 'addCharacter'
+    Session.set 'previousRoute', FlowRouter.getRouteName()
