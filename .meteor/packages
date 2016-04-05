@@ -34,6 +34,7 @@ kadira:blaze-layout
 # COLLECTIONS
 aldeed:collection2
 mongo                       # The database Meteor supports right now
+percolate:migrations
 
 # UTILS
 reactive-var
