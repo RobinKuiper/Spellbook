@@ -1,8 +1,15 @@
-//nav.ui.two.column.grid
-    .column
-        button#allSpellsButton.ui.big.fluid.button All Spells
-    .column
-        button#mySpellsButton.ui.big.fluid.button My Spells
+if isCharacter
+    nav.ui.two.column.grid
+        if allSpells
+            .column
+                button#mySpellsButton.ui.big.fluid.button My Spells
+            .column
+                button#allSpellsButton.ui.big.fluid.active.button All Spells
+        else
+            .column
+                button#mySpellsButton.ui.big.fluid.active.button My Spells
+            .column
+                button#allSpellsButton.ui.big.fluid.button All Spells
 nav.ui.three.column.grid
     //unless isCharacter
     .column
@@ -44,12 +51,24 @@ if spells
     #alphabetSidebar.ui.secondary.vertical.menu
         each letter in letters
             a.item(href='#'+letter) #{letter}
+    //table.ui.table
+        each spell in spells
+            tr
+                td= formatLevel(spell.level)
+                td
+                    h5.ui.header
+                        .content
+                            = spell.name
+                            .sub.header #{spell.book.name}
+                td #{spell.castingTime}
+                td= formatRange(spell.range)
+                td #{spell.school}
     #spells.ui.divided.very.relaxed.selection.list
         each spell in spells
             //.ui.sub.header= group(spell)
             a.item(href='/spell/#{spell.slug}')
                 .left.floated.content
-                    .ui.blue.label= formatSmallLevel(spell.level)
+                    .ui.blue.circular.label= formatSmallLevel(spell.level)
                 .right.floated.content
                     .ui.label #{spell.castingTime}
                 .content
