@@ -11,8 +11,8 @@ Meteor.methods
         else
           return result
 
-  removeSpell: (spellId) ->
-    Spellbook.remove { userId: @userId, spellId: spellId }, (err, result) ->
+  removeSpell: (spellId, characterId) ->
+    Spellbook.remove { userId: @userId, spellId: spellId, characterId: characterId }, (err, result) ->
       if err
         throw new Meteor.Error err
       else

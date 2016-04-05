@@ -1,36 +1,34 @@
 spellId = ''
+characterId = ''
 
 Template.showSpell.onCreated ->
+  characterId = Session.get 'characterId'
+  console.log characterId
+
   spellSlug = FlowRouter.getParam('spellSlug')
   if !spell = Spell.findOne { slug: spellSlug }
-    utils.back()
+    history.back()
   else
     spellId = spell._id
 
 Template.showSpell.helpers
+  character: -> Character.findOne characterId
   spell: -> Spell.findOne spellId
   inSpellbook: ->
-    characters = []
-    if Meteor.user()
-      inSpellbooks = Spellbook.find { userId: Meteor.user()._id, spellId: spellId }
-      inSpellbooks.forEach (spellbook) ->
-        characters.push Character.findOne spellbook.characterId
-      return characters
+    Spellbook.findOne { characterId: characterId, spellId: spellId }
 
 Template.showSpell.events
   'click #addButton': ->
     if Meteor.user()
-      Session.set 'showAddToSpellbookModal', true
+      if character = Character.findOne characterId
+        Meteor.call 'addSpell', spellId, characterId, (err, result) ->
+          if err
+            console.log err
+      else
+        Session.set 'showAddToSpellbookModal', true
     else
       Session.set 'showSignUpModal', true
   'click #removeButton': ->
-    Meteor.call 'removeSpell', spellId, (err, result) ->
+    Meteor.call 'removeSpell', spellId, characterId, (err, result) ->
       if err
         console.log err
-
-
-###
-  Meteor.call 'addSpell', spellId, (err, result) ->
-        if err
-          console.log err
-###
