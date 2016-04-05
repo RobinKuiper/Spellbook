@@ -9,7 +9,10 @@ header.ui.huge.inverted.blue.menu
     if isHomeRoute
         .right.menu
             if showSearch
-                input#searchInput.item(type='text' value=query)
+                .ui.right.aligned.category.search.item
+                    .ui.transparant.icon.input
+                        input#searchInput(type='text' placeholder='Search' value=query)
+                        i.search.link.icon
             else
                 a#searchButton.item
                     i.search.icon
