@@ -22,6 +22,7 @@ Tracker.autorun ->
 
 Template.spells.onCreated ->
   Session.set 'characterId', if Character.findOne FlowRouter.getParam('characterId') then FlowRouter.getParam('characterId') else ''
+  type.set if Character.findOne FlowRouter.getParam('characterId') then 'my' else 'all'
 
 Template.spells.onRendered ->
   C.set ''
@@ -62,6 +63,7 @@ Template.spells.onRendered ->
 
 Template.spells.helpers
   classes: -> Class.find {}
+  allSpells: -> type.get() == 'all'
   #spells: -> spellPaginator.find {}, { itemsPerPage: 10 }
   isCharacter: -> FlowRouter.getRouteName() == 'characterSpells'
   group: (spell) ->
@@ -75,7 +77,7 @@ Template.spells.helpers
         group.done.push spell.level
         return spell.level
   spells: ->
-    if Character.findOne Session.get 'characterId'
+    if(type.get() == 'my')
       filter = { sort: {} }
       filter.sort[sortBy.get()] = 1
 
@@ -99,9 +101,9 @@ Template.spells.helpers
   letters: -> 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split ''
 
 Template.spells.events
-  'click #spells .item': (e) ->
-    spellId = $(e.currentTarget).attr('id')
-    FlowRouter.go '/spell/'+spellId
+  #'click #spells .item': (e) ->
+  #  spellId = $(e.currentTarget).attr('id')
+  #  FlowRouter.go '/spell/'+spellId
   'click #allSpellsButton': ->
     type.set 'all'
   'click #mySpellsButton': ->
