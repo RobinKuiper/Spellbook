@@ -1,6 +1,6 @@
 Meteor.publish 'spells', (skip, limit, level, c, sortBy, search) ->
   select = {}
-  if search != ''
+  if search != '' && search != null
     select.name = { $regex: utils.RegExp.escape(search), $options: 'i' }
   if level != ''
     select.level = level*1
