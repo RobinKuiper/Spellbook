@@ -41,14 +41,6 @@ characterSection.route '/:characterId/spells',
   action: ->
     BlazeLayout.render 'mainLayout', { content: 'spells' }
 
-adminSection = FlowRouter.group
-  prefix: '/admin'
-
-adminSection.route '/spell/add',
-  name: 'addSpell'
-  action: ->
-    BlazeLayout.render 'adminLayout', { content: 'addSpell' }
-
 FlowRouter.triggers.exit ->
   if FlowRouter.getRouteName() != 'addCharacter'
     Session.set 'previousRoute', FlowRouter.getRouteName()
