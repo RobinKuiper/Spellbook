@@ -1,6 +1,6 @@
 Migrations.add
-  version: 3
-  name: 'Add a-e spells'
+  version: 4
+  name: 'Add f spells'
   up: ->
     spells = [
       {
@@ -63,21 +63,17 @@ Migrations.add
           main: 'You project a phantasmal image of a creature’s worst fears. Each creature in a 30-foot cone must succeed on a Wisdom saving throw or drop whatever it is holding and become frightened for the duration. While frightened by this spell, a creature must take the Dash action and move away from you by the safest available route on each of its turns, unless there is nowhere to move. If the creature ends its turn in a location where it doesn’t have line of sight to you, the creature can make a Wisdom saving throw. On a successful save, the spell ends for that creature.'
       }
       {
-        name: ""
+        name: "Feather Fall"
         level: 1
-        school: 'Evocation'
+        school: 'Transmutation'
         castingTime: '1 Action'
-        range: 0
-        duration: 'Instanteneous'
-        components: ['Verbal', 'Somatic']
+        range: 60
+        duration: '1 Minute'
+        components: ['Verbal', 'Material']
+        material: 'a small feather or piece of down'
         classes: [
           Class.findOne({name: 'Bard'})._id
-          Class.findOne({name: 'Cleric'})._id
-          Class.findOne({name: 'Druid'})._id
-          Class.findOne({name: 'Paladin'})._id
-          Class.findOne({name: 'Ranger'})._id
           Class.findOne({name: 'Sorcerer'})._id
-          Class.findOne({name: 'Warlock'})._id
           Class.findOne({name: 'Wizard'})._id
         ]
         version: 5
@@ -85,24 +81,20 @@ Migrations.add
           name: 'Player Hand Book'
           page: 239
         descriptions:
-          main: ''
-          level: ''
+          main: 'Reaction: When you or a creature within 60 feet of you falls Choose up to five falling creatures within range. A falling creature’s rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.'
       }
       {
-        name: ""
-        level: 1
-        school: 'Evocation'
+        name: "Feeblemind"
+        level: 8
+        school: 'Enchantment'
         castingTime: '1 Action'
-        range: 0
+        range: 150
         duration: 'Instanteneous'
-        components: ['Verbal', 'Somatic']
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a handful of clay, crystal, glass, or mineral spheres'
         classes: [
           Class.findOne({name: 'Bard'})._id
-          Class.findOne({name: 'Cleric'})._id
           Class.findOne({name: 'Druid'})._id
-          Class.findOne({name: 'Paladin'})._id
-          Class.findOne({name: 'Ranger'})._id
-          Class.findOne({name: 'Sorcerer'})._id
           Class.findOne({name: 'Warlock'})._id
           Class.findOne({name: 'Wizard'})._id
         ]
@@ -111,36 +103,443 @@ Migrations.add
           name: 'Player Hand Book'
           page: 239
         descriptions:
-          main: ''
-          level: ''
+          main: 'You blast the mind of a creature that you can see within range, attempting to shatter its intellect and personality. The target takes 4d6 psychic damage and must make an Intelligence saving throw. On a failed save, the creature’s Intelligence and Charisma scores become 1. The creature can’t cast spells, activate magic items, understand language, or communicate in any intelligible way. The creature can, however, identify its friends, follow them, and even protect them. At the end of every 30 days, the creature can repeat its saving throw against this spell. If it succeeds on its saving throw, the spell ends. The spell can also be ended by greater restoration, heal or wish.'
+      }
+      {
+        name: "Feign Death (Ritual)"
+        level: 3
+        school: 'Necromancy'
+        castingTime: '1 Action'
+        range: 5
+        duration: '1 Hour'
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a pinch of graveyard dirt'
+        classes: [
+          Class.findOne({name: 'Bard'})._id
+          Class.findOne({name: 'Cleric'})._id
+          Class.findOne({name: 'Druid'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 240
+        descriptions:
+          main: 'You touch a willing creature and put it into a cataleptic state that is indistinguishable from death. For the spell’s duration, or until you use an action to touch the target and dismiss the spell, the target appears dead to all outward inspection and to spells used to determine the target’s status. The target is blinded and incapacitated, and its speed drops to 0. The target has resistance to all damage except psychic damage. If the target is diseased or poisoned when you cast the spell, or becomes diseased or poisoned while under the spell’s effect, the disease and poison have no effect until the spell ends.'
+      }
+      {
+        name: "Find Familiar (Ritual)"
+        level: 1
+        school: 'Conjuration'
+        castingTime: '1 Hour'
+        range: 10
+        duration: 'Instanteneous'
+        components: ['Verbal', 'Somatic', 'Material']
+        material: '10 gp worth of charcoal, incense, and herbs that must be consumed by fire in a brass brazier'
+        classes: [
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 240
+        descriptions:
+          main: 'You gain the service of a familiar, a spirit that takes an animal form you choose: bat, cat, crab, frog (toad), hawk. lizard, octopus, owl, poisonous snake, fish (quipper), rat, raven, sea horse, spider, or weasel. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, though it is a celestial, fey or fiend (your choice) instead of a beast. Your familiar acts independently of you, but it always obeys your commands. In combat, it rolls its own initiative and acts on its own turn. A familiar can’t attack, but it can take other actions as normal. When the familiar drops to 0 hit points, it disappears, leaving behind no physical form. It reappears after you cast this spell again. While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as an action, you can see through your familiar’s eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses that the familiar has. During this time, you are deaf and blind with regard to your own senses. As an action, you can temporarily dismiss your familiar. It disappears into a pocket dimension where it awaits you summons. Alternatively, you can dismiss it forever. As an action while it is temporarily dismissed, you can cause it to reappear in any unoccupied space within 30 feet of you. You can’t have more than one familiar at a time. If you cast this spell while you already have a familiar, you instead cause it to adopt a new form. Choose one of the forms from the above list. Your familiar transforms into the chosen creature. Finally, when you cast a spell with a range of touch, your familiar can deliver the spell as if it had cast the spell. Your familiar must be within 100 feet of you, and it must use its reaction to deliver the spell when you cast it. If the spell requires an attack roll, you use your attack modifier for the roll.'
+      }
+      {
+        name: "Find Steed"
+        level: 2
+        school: 'Conjuration'
+        castingTime: '10 Minutes'
+        range: 30
+        duration: 'Instanteneous'
+        components: ['Verbal', 'Somatic']
+        classes: [
+          Class.findOne({name: 'Paladin'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 240
+        descriptions:
+          main: '
+You summon a spirit that assumes the form of an unusually intelligent, strong, and loyal steed, creating a long-lasting bond with it.
+Appearing in an unoccupied space within range, the steed takes on a form that you choose, such as a warhorse, a pony, a camel, an elk, or a mastiff. (Your DM might allow other animals to be summoned as steeds.) The steed has the statistics of the chosen form, though it is a celestial, fey, or fiend (your choice) instead of its normal type. Additionally, if your steed has an Intelligence of 5 or less, its Intelligence becomes 6, and it gains the ability to understand one language of your choice that you speak.
+Your steed serves you as a mount, both in combat and out, and you have an instinctive bond with it that allows you to fight as a seamless unit. While mounted on your steed, you can make any spell you cast that targets only you also target your steed.
+When the steed drops to 0 hit points, it disappears, leaving behind no physical form. You can also dismiss your steed at any time as an action, causing it to disappear. In either case, casting this spell again summons the same steed, restored to its hit point maximum.
+While your steed is within 1 mile of you, you can communicate with it telepathically.
+You can’t have more than one steed bonded by this spell at a time. As an action, you can release the steed from its bond at any time, causing it to disappear.'
+      }
+      {
+        name: "Find the Path"
+        level: 6
+        school: 'Divination'
+        castingTime: '1 Minute'
+        range: 0
+        duration: 'Concentration, up to 1 day '
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a set of divinatory tools – such as bones, ivory sticks, cards, teeth, or carved runes – worth 100 gp and an object from the location you wish to find'
+        classes: [
+          Class.findOne({name: 'Bard'})._id
+          Class.findOne({name: 'Cleric'})._id
+          Class.findOne({name: 'Druid'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 240
+        descriptions:
+          main: 'This spell allows you to find the shortest, most direct physical route to a specific fixed location that you are familiar with on the same plane of existence. If you name a destination on another plan of existence, a destination that moves (such as a mobile fortress), or a destination that isn’t specific (such as a green dragon’s lair”), the spell fails. For the duration, as long as you are on the same plane of existence as the destination, you know how far it is and in what direction it lies. While you are traveling there, whenever you are presented with a choice of paths along the way, you atomatically determine which path is the shortest and most direct route (but not necessarily the safest route) to the destination.”'
+      }
+      {
+        name: "Find Traps"
+        level: 2
+        school: 'Divination'
+        castingTime: '1 Action'
+        range: 120
+        duration: 'Instanteneous'
+        components: ['Verbal', 'Somatic']
+        classes: [
+          Class.findOne({name: 'Cleric'})._id
+          Class.findOne({name: 'Druid'})._id
+          Class.findOne({name: 'Ranger'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 241
+        descriptions:
+          main: 'You sense the presence of any trap within range that is within line of sight. A trap, for the purpose of this spell, includes anything that would inflict a sudden or unexpected effect you consider harmful or undesirable, which was specifically intended as such by its creator. Thus, the spell would sense an area affected by the alarm spell, a glyph of warding, or a mechanical pit trap, but it would not reveal a natural weakness in the floor, an unstable ceiling, or a hidden sinkhole. This spell merely reveals that a trap is present. You don’t learn the location of each trap, but you do learn the general nature of the danger posed by a trap you sense.'
+      }
+      {
+        name: "Finger of Death"
+        level: 7
+        school: 'Necromancy'
+        castingTime: '1 Action'
+        range: 60
+        duration: 'Instanteneous'
+        components: ['Verbal', 'Somatic']
+        classes: [
+          Class.findOne({name: 'Sorcerer'})._id
+          Class.findOne({name: 'Warlock'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 241
+        descriptions:
+          main: 'You send negative energy coursing through a creature that you can see within range, causing it searing pain. The target must make a Constitution saving throw. It takes 7d8 + 30 necrotic damage on a failed save, or half as much damage on a successful one. A humanoid killed by this spell rises at the start of your next turn as a zombie that is permanently under your command, following your verbal orders to the best of its ability.'
+      }
+      {
+        name: "Fire Bolt"
+        level: 0
+        school: 'Evocation'
+        castingTime: '1 Action'
+        range: 120
+        duration: 'Instanteneous'
+        components: ['Verbal', 'Somatic']
+        classes: [
+          Class.findOne({name: 'Sorcerer'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 241
+        descriptions:
+          main: 'You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn’t being worn or carried.'
+          level: 'This spell’s damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).'
+      }
+      {
+        name: "Fire Shield"
+        level: 4
+        school: 'Evocation'
+        castingTime: '1 Action'
+        range: 0
+        duration: '10 Minutes'
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a bit of phosphorous or a firefly'
+        classes: [
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 241
+        descriptions:
+          main: 'Thin and wispy flames wreathe your body for the duration, shedding bright light in a 10-foot radius and dim light for an additional 10 feet, You can end the spell early by using an action to dismiss it. The flames provide you with a warm shield or a chill shield, as you choose. The warm shield grants you resistance to cold damage, and the chill shield grants you resistance to fire damage. In addition, whenever a creature within 5 feet of you hits you with a melee attack, the shield erupts with flame. The attacker takes 2d8 fire damage from a warm shield, or 2d8 cold damage from a cold shield.'
+      }
+      {
+        name: "Fire Storm"
+        level: 7
+        school: 'Evocation'
+        castingTime: '1 Action'
+        range: 150
+        duration: 'Instanteneous'
+        components: ['Verbal', 'Somatic']
+        classes: [
+          Class.findOne({name: 'Cleric'})._id
+          Class.findOne({name: 'Druid'})._id
+          Class.findOne({name: 'Sorcerer'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 241
+        descriptions:
+          main: 'A storm made up of sheets of roaring flame appears in a location you choose within range. The area of the storm consists of up to 10-foot cubes, which you can arrange as you wish. Each cube must have at least one face adjacent to the face of another cube. Each creature in the area must make Dexterity saving throw. It takes 7d10 fire damage on a failed save, or half as much damage on a successful one. The fire damages objects in the area and ignites flammable objects that aren’t being worn or carried. If you choose, plant life in the area is unaffected by this spell.'
+      }
+      {
+        name: "Fireball"
+        level: 3
+        school: 'Evocation'
+        castingTime: '1 Action'
+        range: 150
+        duration: 'Instanteneous'
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a tiny ball of bat guana and sulfur'
+        classes: [
+          Class.findOne({name: 'Sorcerer'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 241
+        descriptions:
+          main: 'A bright streak flashes from your pointing finger to a point you choose within range then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot radius must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one. The fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.'
+          level: 'When you cast this spell using a spell slot of 4th level of higher, the damage increases by 1d6 for each slot level above 3rd.'
+      }
+      {
+        name: "Flame Blade"
+        level: 2
+        school: 'Evocation'
+        castingTime: '1 Bonus Action'
+        range: 0
+        duration: 'Concentration, up to 10 minutes '
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'leaf of sumac'
+        classes: [
+          Class.findOne({name: 'Druid'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 242
+        descriptions:
+          main: 'You evoke a fiery blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action. You can use your action to make a melee spell attack with the fiery blade. On a hit, the target takes 3d6 fire damage. The flaming blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.'
+          level: 'When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for every two slot levels above 2nd.'
+      }
+      {
+        name: "Flame Strike"
+        level: 5
+        school: 'Evocation'
+        castingTime: '1 Action'
+        range: 60
+        duration: 'Instanteneous'
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'pinch of sulfur'
+        classes: [
+          Class.findOne({name: 'Cleric'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 242
+        descriptions:
+          main: 'A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot radius, 40-foot-high cylinder centered on a point within range must make a Dexterity saving throw. A creature takes 4d6 fire damage and 4d6 radiant damage on a failed save, or half as much damage on a successful one.'
+          level: 'When you cast this spell using a spell slot of 6th level or higher, the fire damage or the radiant damage (your choice) inceases by 1d6 for each slot level above 5th.'
+      }
+      {
+        name: "Flaming Sphere"
+        level: 2
+        school: 'Conjuration'
+        castingTime: '1 Action'
+        range: 60
+        duration: 'Concentration, up to 1 minute '
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a bit of tallow, a pinch of brimstone, and a dusting of powdered iron'
+        classes: [
+          Class.findOne({name: 'Druid'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 242
+        descriptions:
+          main: 'A 5-foot-diameter sphere of fire appears in an unoccupied space of your choice within range and lasts for the duration. Any creature that ends its turn within 5 feet of the sphere must make a Dexterity saving throw. The creature takes 2d6 fire damage on a failed save, or half as much damage on a successful one. As a bonus action, you can move the sphere up to 30 feet. If you ram the sphere into a creature, that creature must make the saving throw against the sphere’s damage, and the sphere stops moving this turn. When you move the sphere, you can direct it over barriers up to 5 feet tall and jump it across pits up to 10 feet wide. The sphere ignites flammable objects not being worn or carried, and it sheds bright light in a 20-foot radius and dim light for an additional 20 feet.'
+          level: 'When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.'
+      }
+      {
+        name: "Flesh to Stone"
+        level: 6
+        school: 'Transmutation'
+        castingTime: '1 Action'
+        range: 60
+        duration: 'Concentration, up to 1 minute'
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a pinch of lime, water, and earth'
+        classes: [
+          Class.findOne({name: 'Warlock'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 243
+        descriptions:
+          main: 'You attempt to turn one creature that you can see within range into stone. If the targets body is made of flesh, the creature must make a Constitution saving throw. On a failed save, it is restrained as its flesh begins to harden. On a successful save, the creature isn’t affected. A creature restrained by this spell must make another Consititution saving throw at the end of each of its turns. If it successfully saves against this spell three times, the spell ends. If it fails saves three times, it is turned to stone and subjected to the petrified condition for the duration. The successes and failures don’t need to be consecutive; keep track of both until the target collects three of a kind. If the creature is physically broken while petrified, it suffers from similar deformities if it reverts to its original state. If you maintain your concentration on this spell for the entire possible duration, the creature is turned to stone until the effect is removed.'
+      }
+      {
+        name: "Fly"
+        level: 3
+        school: 'Transmutation'
+        castingTime: '1 Action'
+        range: 5
+        duration: 'Concentration, up to 10 minutes '
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a wing feather from any bird'
+        classes: [
+          Class.findOne({name: 'Sorcerer'})._id
+          Class.findOne({name: 'Warlock'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 243
+        descriptions:
+          main: 'You touch a willing creature. The target gains a flying speed of 60 feet for the duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.'
+          level: 'When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.'
+      }
+      {
+        name: "Fog Cloud"
+        level: 1
+        school: 'Evocation'
+        castingTime: '1 Action'
+        range: 120
+        duration: 'Concentration, up to 1 hour '
+        components: ['Verbal', 'Somatic']
+        classes: [
+          Class.findOne({name: 'Druid'})._id
+          Class.findOne({name: 'Ranger'})._id
+          Class.findOne({name: 'Sorcerer'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 243
+        descriptions:
+          main: 'You create a 20-foot-radius sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured, It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it'
+          level: 'When you cast this spell using a spell slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st.'
+      }
+      {
+        name: "Forbiddance (Ritual)"
+        level: 6
+        school: 'Abjuration'
+        castingTime: '10 Minutes'
+        range: 5
+        duration: '1 Day'
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a sprinkling of holy water, rare incense, and powdered ruby worth at least 1,000 gp'
+        classes: [
+          Class.findOne({name: 'Cleric'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 243
+        descriptions:
+          main: 'You create a ward against magical travel that protects up to 40,000 square feet of floor space to a height of 30 feet above the floor. For the duration, creatures can’t teleport into the area or use portals, such as those created by the gate spell, to enter the area. The spell proofs the area against planar travel, and therefore prevents creatures from accessing the area by way of the Astral Plane, Ethereal Plane, Feywild, Shadowfell, or the plane shift spell. In addition, the spell damages types of creatures that you choose when you cast it. Choose one or more of the following: celestials, elementals, fey, fiends, and undead. When a chosen creature enters the spell’s area for the first time on a turn or starts its turn there, the creature takes 5d10 radiant or necrotic damage (your choice when you cast this spell). When you cast this spell, you can designate a password. A creature that speaks the password as it enters the area takes no damage from the spell. The spell’s area can’t overlap with the area of another forbiddance spell. If you cast forbiddance every day for 30 days in the same location, the spell lasts until it is dispelled, and the material components are consumed on the last casting.'
+      }
+      {
+        name: "Forcecage"
+        level: 7
+        school: 'Evocation'
+        castingTime: '1 Action'
+        range: 100
+        duration: '1 Hour'
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'ruby dust worth 1,500 gp'
+        classes: [
+          Class.findOne({name: 'Bard'})._id
+          Class.findOne({name: 'Warlock'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 243
+        descriptions:
+          main: 'An immobile, invisible, cube-shaped prison composed of magical force springs into existence around an area you choose within range. The prison can be a cage or a solid box as you choose. A prison in the shape of a cage can be up to 20 feet on a side and is made from 1/2-inch diameter bars spaced 1/2 inch apart. A prison in the shape of a box can be up to 10 feet on a side, creating a solid barrier that prevents any matter from passing through it and blocking any spells cast into or out of the area. When you cast the spell, any creature that is completely inside the cage’s area is trapped. Creatures only partially within the area, or those too large to fit inside the area, are pushed away from the center of the area until they are completely outside the area. A creature inside the cage can’t leave it by nonmagical means. If the creature tries to use teleportation or interplanar travel to leave the cage, it must first make a Charisma saving throw. On a success, the creature can use that magic to exit the cage. On a failure, the creature can’t exit the cage and wastes the use of the spell or effect. The cage also extends into the Ethereal Plane, blocking ethereal travel. This spell can’t be dispelled by dispel magic.'
+      }
+      {
+        name: "Foresight"
+        level: 9
+        school: 'Divination'
+        castingTime: '1 Minute'
+        range: 5
+        duration: '8 Hours'
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a hummingbird feather'
+        classes: [
+          Class.findOne({name: 'Bard'})._id
+          Class.findOne({name: 'Druid'})._id
+          Class.findOne({name: 'Warlock'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 244
+        descriptions:
+          main: 'You touch a willing creature and bestow a limited ability to see into the immediate future. For the duration, the target can’t be surprised and has advantage on attack rolls, ability checks, and saving throws. Additionally, other creatures have disadvantage on attack rolls against the target for the duration. This spell immediately ends if you cast it again before its duration ends.'
+      }
+      {
+        name: "Freedom of Movement"
+        level: 4
+        school: 'Abjuration'
+        castingTime: '1 Action'
+        range: 5
+        duration: '1 Hour'
+        components: ['Verbal', 'Somatic', 'Material']
+        material: 'a leather strap, bound around the arm or a similar appendage'
+        classes: [
+          Class.findOne({name: 'Bard'})._id
+          Class.findOne({name: 'Cleric'})._id
+          Class.findOne({name: 'Druid'})._id
+          Class.findOne({name: 'Ranger'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 244
+        descriptions:
+          main: 'You touch a willing creature. For the duration, the target’s movement is unaffected by difficult terrain, and spells and other magical effects can neither reduce the target’s speed nor cause the target to be paralyzed or restrained. The target can also spend 5 feet of movement to automatically escape from nonmagical restraints, such as manacles or a creature that has it grappled. Finally, being underwater imposes no penalties on teh target’s movement or attacks.'
+      }
+      {
+        name: "Friends"
+        level: 0
+        school: 'Enchantment'
+        castingTime: '1 Action'
+        range: 0
+        duration: 'Concentration, up to 1 minute '
+        components: ['Somatic', 'Material']
+        material: 'a small amount of makeup applied to the face as this spell is cast'
+        classes: [
+          Class.findOne({name: 'Bard'})._id
+          Class.findOne({name: 'Sorcerer'})._id
+          Class.findOne({name: 'Warlock'})._id
+          Class.findOne({name: 'Wizard'})._id
+        ]
+        version: 5
+        book:
+          name: 'Player Hand Book'
+          page: 244
+        descriptions:
+          main: 'For the duration, you have advantage on all Charisma checks directed at one creature of your choice that isn’t hostile toward you. When the spell ends, the creature realizes that you used magic to influence its mood and becomes hostile toward you. A creature prone to violence might attack you. Another creature might seek retribution in other ways (at the DM’s discretion), depending on the nature of your interaction with it.'
       }
     ]
-
-
-
-{
-  name: ""
-  level: 1
-  school: 'Evocation'
-  castingTime: '1 Action'
-  range: 0
-  duration: 'Instanteneous'
-  components: ['Verbal', 'Somatic']
-  classes: [
-    Class.findOne({name: 'Bard'})._id
-    Class.findOne({name: 'Cleric'})._id
-    Class.findOne({name: 'Druid'})._id
-    Class.findOne({name: 'Paladin'})._id
-    Class.findOne({name: 'Ranger'})._id
-    Class.findOne({name: 'Sorcerer'})._id
-    Class.findOne({name: 'Warlock'})._id
-    Class.findOne({name: 'Wizard'})._id
-  ]
-  version: 5
-  book:
-    name: 'Player Hand Book'
-    page: 239
-  descriptions:
-    main: ''
-    level: ''
-}
