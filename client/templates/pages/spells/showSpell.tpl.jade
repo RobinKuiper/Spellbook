@@ -5,18 +5,25 @@
             | #{spell.school}
         span.ui.header #{spell.name}
         .ui.top.attached.segment
-            .ui.list
-                .item
-                    i.clock.icon
-                    .content Casting Time: #{spell.castingTime}
-                .item
-                    i.wifi.icon
-                    .content
-                        | Range:
-                        = formatRange(spell.range)
-                .item
-                    i.history.icon
-                    .content Duration: #{spell.duration}
+            .ui.two.column.grid
+                .column
+                    .ui.list
+                        .item
+                            i.clock.icon
+                            .content Casting Time: #{spell.castingTime}
+                        .item
+                            i.wifi.icon
+                            .content
+                                | Range:
+                                = formatRange(spell.range)
+                        .item
+                            i.history.icon
+                            .content Duration: #{spell.duration}
+                .column
+                    .ui.list
+                        each c in spell.classes
+                            .item #{c}
+
             .ui.divider
             p #{spell.descriptions.main}
             if spell.descriptions.level
