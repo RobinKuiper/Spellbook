@@ -1,6 +1,7 @@
-Session.setDefault 'showSignUpModal', false
-Session.setDefault 'showAddToSpellbookModal', false
-Session.setDefault 'spellToAdd', ''
+Meteor.startup ->
+  Session.setDefault 'showSignUpModal', false
+  Session.setDefault 'showAddToSpellbookModal', false
+  Session.setDefault 'spellToAdd', ''
 
 Tracker.autorun ->
   if Session.get 'showSignUpModal'

@@ -7,9 +7,10 @@ C = new ReactiveVar('')
 type = new ReactiveVar 'all'
 limit = new ReactiveVar 50
 #group = { done: [] }
+spellsReady = new ReactiveVar false
 
 Tracker.autorun ->
-  Meteor.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
+  #Meteor.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
   #Meteor.subscribe 'spellbook', Session.get('characterId'), 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
 
 Tracker.autorun ->
@@ -23,6 +24,13 @@ Tracker.autorun ->
 Template.spells.onCreated ->
   Session.set 'characterId', if Character.findOne FlowRouter.getParam('characterId') then FlowRouter.getParam('characterId') else ''
   type.set if Character.findOne FlowRouter.getParam('characterId') then 'my' else 'all'
+
+  self = this
+  self.autorun ->
+    spellsReady.set false
+    subscription = self.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
+    if subscription.ready()
+      spellsReady.set true
 
 Template.spells.onRendered ->
   C.set ''
@@ -62,6 +70,7 @@ Template.spells.onRendered ->
   ###
 
 Template.spells.helpers
+  spellsReady: -> spellsReady.get()
   classes: -> Class.find {}
   allSpells: -> type.get() == 'all'
   #spells: -> spellPaginator.find {}, { itemsPerPage: 10 }
