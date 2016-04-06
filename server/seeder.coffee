@@ -20,7 +20,7 @@
     version: 5
     book:
       name: 'Player Hand Book'
-      page: 253
+      page: 263
     descriptions:
       main: ''
       level: ''
