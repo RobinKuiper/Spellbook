@@ -10,6 +10,7 @@ limit = new ReactiveVar 50
 spellsReady = new ReactiveVar false
 infiniteScroll = false
 
+
 Template.spells.onCreated ->
   Session.set 'characterId', if Character.findOne FlowRouter.getParam('characterId') then FlowRouter.getParam('characterId') else ''
   type.set if Character.findOne FlowRouter.getParam('characterId') then 'my' else 'all'
