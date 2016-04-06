@@ -13,6 +13,10 @@ if isCharacter
 nav.ui.three.column.grid
     //unless isCharacter
     .column
+        //select#classDropdown.ui.fluid.dropdown(multiple="")
+            option(value="all") All Classes
+            each c in classes
+                option(value=c.name) #{c.name}
         button#classDropdown.ui.fluid.dropdown.button
             .text All Classes
             i.dropdown.icon

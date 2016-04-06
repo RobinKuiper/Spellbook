@@ -1,21 +1,27 @@
 spellId = ''
 characterId = ''
+spellReady = new ReactiveVar false
 
 Template.showSpell.onCreated ->
   characterId = Session.get 'characterId'
-  console.log characterId
 
   spellSlug = FlowRouter.getParam('spellSlug')
   if !spell = Spell.findOne { slug: spellSlug }
     history.back()
   else
     spellId = spell._id
+    self = this
+    self.autorun ->
+      spellReady.set false
+      subscription = Meteor.subscribe 'spell', spellId
+      if subscription.ready()
+        spellReady.set true
 
 Template.showSpell.helpers
   character: -> Character.findOne characterId
   spell: -> Spell.findOne spellId
-  inSpellbook: ->
-    Spellbook.findOne { characterId: characterId, spellId: spellId }
+  inSpellbook: -> Spellbook.findOne { characterId: characterId, spellId: spellId }
+  spellReady: -> spellReady.get()
 
 Template.showSpell.events
   'click #addButton': ->
