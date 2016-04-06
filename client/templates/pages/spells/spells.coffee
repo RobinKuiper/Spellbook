@@ -8,18 +8,7 @@ type = new ReactiveVar 'all'
 limit = new ReactiveVar 50
 #group = { done: [] }
 spellsReady = new ReactiveVar false
-
-Tracker.autorun ->
-  #Meteor.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
-  #Meteor.subscribe 'spellbook', Session.get('characterId'), 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
-
-Tracker.autorun ->
-  if FlowRouter.getRouteName() == 'home'
-    $(window).on 'scroll', (e) ->
-      if $(window).scrollTop() + $(window).height() == $(document).height()
-        limit.set limit.get()+50
-  else
-    $(window).unbind('scroll')
+infiniteScroll = false
 
 Template.spells.onCreated ->
   Session.set 'characterId', if Character.findOne FlowRouter.getParam('characterId') then FlowRouter.getParam('characterId') else ''
@@ -27,10 +16,23 @@ Template.spells.onCreated ->
 
   self = this
   self.autorun ->
-    spellsReady.set false
+    if !infiniteScroll
+      spellsReady.set false
+    else
+      infiniteScroll = false
     subscription = self.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
     if subscription.ready()
       spellsReady.set true
+
+  self.autorun ->
+    if FlowRouter.getRouteName() == 'home'
+      $(window).on 'scroll', (e) ->
+        if $(window).scrollTop() + $(window).height() == $(document).height()
+          console.log 'bottom'
+          infiniteScroll = true
+          limit.set limit.get()+50
+    else
+      $(window).unbind('scroll')
 
 Template.spells.onRendered ->
   C.set ''
