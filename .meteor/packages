@@ -18,7 +18,6 @@ accounts-facebook
 accounts-google
 accounts-twitter
 service-configuration
-alanning:roles
 
 # COMPILERS
 mquandalle:jade
@@ -33,12 +32,12 @@ kadira:blaze-layout
 
 # COLLECTIONS
 aldeed:collection2
+todda00:friendly-slugs
 mongo                       # The database Meteor supports right now
 percolate:migrations
 
 # UTILS
 reactive-var
-todda00:friendly-slugs
 juliancwirko:s-alert
 meteorhacks:kadira
 kadira:debug
