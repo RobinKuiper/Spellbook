@@ -12,8 +12,8 @@
     ]
     version: 5
     book:
-      name: "Sword Coast Adventure's Guide"
-      page: 143
+      name: "Player HandBook"
+      page: 262
     descriptions:
       main: ''
       level: ''

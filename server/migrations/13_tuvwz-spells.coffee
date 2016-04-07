@@ -1,3 +1,5 @@
+# Most of these spells are added by Dennis Siemons, thank you!
+
 Migrations.add
   version: 13
   name: 'Add t, u, v, w, z spells'
