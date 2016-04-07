@@ -74,7 +74,7 @@ Template.spells.onRendered ->
 
 Template.spells.helpers
   spellsReady: -> spellsReady.get()
-  classes: -> Class.find {}
+  classes: -> Class.find { hasSpells: true }
   allSpells: -> type.get() == 'all'
   #spells: -> spellPaginator.find {}, { itemsPerPage: 10 }
   isCharacter: -> FlowRouter.getRouteName() == 'characterSpells'

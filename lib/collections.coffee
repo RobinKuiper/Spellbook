@@ -13,6 +13,9 @@ schemas.Class = new SimpleSchema
   name:
     type: String
     label: 'Name'
+  hasSpells:
+    type: Boolean
+    optional: true
   createdAt:
     type: Date
     defaultValue: new Date()
