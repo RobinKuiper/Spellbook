@@ -1,5 +1,5 @@
 Migrations.add
-  version: 10
+  version: 14
   name: 'Change class Ids to class names'
   up: ->
     spells = Spell.find {}
