@@ -361,7 +361,7 @@ The hand can’t attack, activate magical items, or carry more than 10 pounds. '
         level: 9
         school: 'Evocation'
         castingTime: '1 action'
-        range: 1 mile
+        range: 5280
         duration: '8 Hours'
         components: ['Verbal', 'Somatic']
         classes: [

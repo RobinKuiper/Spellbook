@@ -25,6 +25,8 @@ Template.registerHelper 'formatRange', (range) ->
     return 'Sight'
   else if range == -1000
     return 'Unlimited'
+  else if range == 5280
+    return '1 Mile'
   else
     return range + ' feet'
 
