@@ -1,2 +1,2 @@
 Meteor.startup ->
-  Migrations.migrateTo(16)
+  Migrations.migrateTo(17)
