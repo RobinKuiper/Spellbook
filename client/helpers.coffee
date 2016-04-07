@@ -23,6 +23,8 @@ Template.registerHelper 'formatRange', (range) ->
     return 'Touch'
   else if range == -1
     return 'Sight'
+  else if range == -1000
+    return 'Unlimited'
   else
     return range + ' feet'
 
