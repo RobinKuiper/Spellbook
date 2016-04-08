@@ -19,7 +19,7 @@ Template.header.events
     else
       Session.set 'showSignUpModal', true
   'click #backButton': -> history.back()
-  'click #sidebarButton': -> $('.ui.sidebar').sidebar('toggle')
+  'click #sidebarButton': -> $('#menuSidebar').sidebar('toggle')
   'click #searchButton': ->
     showSearch.set true
     Meteor.setTimeout ->

@@ -113,10 +113,9 @@ Template.spells.helpers
   letters: -> 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split ''
 
 Template.spells.events
-  #'click #spells .item': (e) ->
-  #  spellId = $(e.currentTarget).attr('id')
-  #  FlowRouter.go '/spell/'+spellId
   'click #allSpellsButton': ->
     type.set 'all'
   'click #mySpellsButton': ->
     type.set 'my'
+  'click #moreFilters': ->
+    $('#filterSidebar').sidebar('toggle')
