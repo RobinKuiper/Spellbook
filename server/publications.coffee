@@ -1,7 +1,4 @@
 ###
-Meteor.publish 'spell', (spellId) ->
-  Spell.find { _id: spellId }
-
 Meteor.publish 'spells', (skip, limit, level, c, sortBy, search) ->
   select = {}
   if search != '' && search != null
@@ -50,3 +47,6 @@ Meteor.publish 'races', ->
 
 Meteor.publish 'characters', ->
   Character.find { userId: @userId }
+
+Meteor.publish 'spell', (slug) ->
+  Spell.find { slug: slug }

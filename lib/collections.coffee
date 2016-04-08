@@ -6,7 +6,7 @@
 
 @spellIndex = new EasySearch.Index
   collection: Spell
-  fields: ['name'] #, 'book.name', 'classes', 'components', 'school', 'level'
+  fields: ['name', 'slug'] #, 'book.name', 'classes', 'components', 'school', 'level'
   engine: new EasySearch.MongoDB
       selector: (searchObject, options, aggregation) ->
         selector = @.defaultConfiguration().selector(searchObject, options, aggregation)
