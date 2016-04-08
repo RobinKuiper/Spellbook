@@ -7,28 +7,13 @@ C = new ReactiveVar('')
 type = new ReactiveVar 'all'
 limit = new ReactiveVar 50
 #group = { done: [] }
-spellsReady = new ReactiveVar false
 infiniteScroll = false
-
 
 Template.spells.onCreated ->
   Session.set 'characterId', if Character.findOne FlowRouter.getParam('characterId') then FlowRouter.getParam('characterId') else ''
   type.set if Character.findOne FlowRouter.getParam('characterId') then 'my' else 'all'
 
   self = this
-  ###
-  self.autorun ->
-    if !infiniteScroll
-      spellsReady.set false
-    else
-      infiniteScroll = false
-    subscription = self.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
-    if subscription.ready()
-      spellsReady.set true
-  ###
-
-  spellsReady.set true
-
   self.autorun ->
     if FlowRouter.getRouteName() == 'home'
       $(window).on 'scroll', (e) ->
@@ -61,23 +46,7 @@ Template.spells.onRendered ->
   #$(window).on 'touchstart touchmove mouseover click', '#alphabetSidebar a', (e) ->
     # Code
 
-  ###
-    $('#verbalCheckbox').checkbox({
-      onChecked: ->
-        verbal.set true
-      onUnchecked: ->
-        verbal.set false
-    }).checkbox('set checked')
-    $('#somaticCheckbox').checkbox({
-      onChecked: ->
-        somatic.set true
-      onUnchecked: ->
-        somatic.set false
-    }).checkbox('set checked')
-  ###
-
 Template.spells.helpers
-  spellsReady: -> spellsReady.get()
   classes: -> Class.find { hasSpells: true }
   allSpells: -> type.get() == 'all'
   #spells: -> spellPaginator.find {}, { itemsPerPage: 10 }
@@ -93,14 +62,24 @@ Template.spells.helpers
         group.done.push spell.level
         return spell.level
   spells: ->
-    spellIndex.search(Session.get('search'), {
-      skip: 0
-      limit: limit.get()
-      props:
-        classes: C.get()
-        level: level.get()
-        sort: sortBy.get()
-    }).fetch()
+    if type.get() == 'all'
+      spellIndex.search(Session.get('search'), {
+        skip: 0
+        limit: limit.get()
+        props:
+          classes: C.get()
+          level: level.get()
+          sort: sortBy.get()
+      }).fetch()
+    else if type.get() == 'my'
+      spellbookIndex.search(Session.get('search'), {
+        skip: 0
+        limit: limit.get()
+        props:
+          classes: C.get()
+          level: level.get()
+          sort: sortBy.get()
+      }).fetch()
   spells2: ->
     if(type.get() == 'my')
       filter = { sort: {} }

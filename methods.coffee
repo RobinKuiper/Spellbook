@@ -3,11 +3,17 @@ Meteor.methods
     console.log q
 
   addSpell: (spellId, characterId) ->
-    if(!Spellbook.findOne { characterId: @userId, spellId: spellId })
-      spell = Spell.findOne spellId
-      Spellbook.insert { userId: @userId, characterId: characterId, spellId: spellId, spell: spell }, (err, result) ->
+    if(!Spellbook.findOne { characterId: characterId, spellId: spellId })
+      s = Spell.findOne spellId
+
+      delete s._id
+      s.userId = @userId
+      s.characterId = characterId
+      s.spellId = spellId
+
+      Spellbook.insert s, (err, result) ->
         if err
-          throw new Meteor.Error err
+          console.log err
         else
           return result
 
@@ -17,10 +23,6 @@ Meteor.methods
         throw new Meteor.Error err
       else
         return result
-
-  addAdmin: ->
-    if Meteor.users.find().count() == 1
-      Roles.addUsersToRoles Meteor.user()._id, ['admin'], 'default'
 
   addCharacter: (char) ->
     levels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
