@@ -51,42 +51,32 @@ nav.ui.three.column.grid
 
 button#moreFilters.ui.button More Filters
 
-//+Paginator_UI spells
-
-if spellsReady
-    if spells
-        #alphabetSidebar.ui.secondary.vertical.menu
-            each letter in letters
-                a.item(href='#'+letter) #{letter}
-        //table.ui.table
-            each spell in spells
-                tr
-                    td= formatLevel(spell.level)
-                    td
-                        h5.ui.header
-                            .content
-                                = spell.name
-                                .sub.header #{spell.book.name}
-                    td #{spell.castingTime}
-                    td= formatRange(spell.range)
-                    td #{spell.school}
-        #spells.ui.divided.very.relaxed.selection.list
-            each spell in spells
-                //.ui.sub.header= group(spell)
-                a.item(href='/spell/#{spell.slug}')
-                    .left.floated.content
-                        .ui.blue.circular.label= formatSmallLevel(spell.level)
-                    .right.floated.content
-                        .ui.label #{spell.castingTime}
-                    .content
-                        .header #{spell.name}
-                        .description #{spell.book.name}
-    else
-        p You don't have any spells in your spellbook yet.
-
+if spells
+    #alphabetSidebar.ui.secondary.vertical.menu
+        each letter in letters
+            a.item(href='#'+letter) #{letter}
+    //table.ui.table
+        each spell in spells
+            tr
+                td= formatLevel(spell.level)
+                td
+                    h5.ui.header
+                        .content
+                            = spell.name
+                            .sub.header #{spell.book.name}
+                td #{spell.castingTime}
+                td= formatRange(spell.range)
+                td #{spell.school}
+    #spells.ui.divided.very.relaxed.selection.list
+        each spell in spells
+            //.ui.sub.header= group(spell)
+            a.item(href='/spell/#{spell.slug}')
+                .left.floated.content
+                    .ui.blue.circular.label= formatSmallLevel(spell.level)
+                .right.floated.content
+                    .ui.label #{spell.castingTime}
+                .content
+                    .header #{spell.name}
+                    .description #{spell.book.name}
 else
-    .ui.segment(style='height: 300px; border: none;')
-        .ui.active.inverted.dimmer
-            .ui.large.text.loader Loading
-
-//+Paginator_UI spells
+    +spellLoading
