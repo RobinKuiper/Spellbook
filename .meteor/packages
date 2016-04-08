@@ -38,6 +38,7 @@ percolate:migrations
 
 # UTILS
 reactive-var
+mrt:reactive-object
 juliancwirko:s-alert
 meteorhacks:kadira
 kadira:debug
