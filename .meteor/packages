@@ -35,6 +35,7 @@ aldeed:collection2
 todda00:friendly-slugs
 mongo                       # The database Meteor supports right now
 percolate:migrations
+easy:search
 
 # UTILS
 reactive-var

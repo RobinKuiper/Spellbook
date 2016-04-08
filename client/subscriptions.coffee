@@ -1,4 +1,3 @@
-#Meteor.subscribe 'spells'
 Meteor.subscribe 'classes'
 Meteor.subscribe 'races'
 Meteor.subscribe 'characters'

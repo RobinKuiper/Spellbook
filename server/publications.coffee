@@ -1,3 +1,4 @@
+###
 Meteor.publish 'spell', (spellId) ->
   Spell.find { _id: spellId }
 
@@ -38,6 +39,8 @@ Meteor.publish 'spellbook', (characterId, skip, limit, level, c, sortBy, search)
   filter.sort['spell.'+sortBy] = 1
 
   Spellbook.find select, filter
+
+###
 
 Meteor.publish 'classes', ->
   Class.find {}

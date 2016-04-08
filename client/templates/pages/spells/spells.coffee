@@ -16,6 +16,7 @@ Template.spells.onCreated ->
   type.set if Character.findOne FlowRouter.getParam('characterId') then 'my' else 'all'
 
   self = this
+  ###
   self.autorun ->
     if !infiniteScroll
       spellsReady.set false
@@ -24,6 +25,9 @@ Template.spells.onCreated ->
     subscription = self.subscribe 'spells', 0, limit.get(), level.get(), C.get(), sortBy.get(), Session.get 'search'
     if subscription.ready()
       spellsReady.set true
+  ###
+
+  spellsReady.set true
 
   self.autorun ->
     if FlowRouter.getRouteName() == 'home'
@@ -89,6 +93,15 @@ Template.spells.helpers
         group.done.push spell.level
         return spell.level
   spells: ->
+    spellIndex.search(Session.get('search'), {
+      skip: 0
+      limit: limit.get()
+      props:
+        classes: C.get()
+        level: level.get()
+        sort: sortBy.get()
+    }).fetch()
+  spells2: ->
     if(type.get() == 'my')
       filter = { sort: {} }
       filter.sort[sortBy.get()] = 1

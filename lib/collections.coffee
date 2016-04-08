@@ -4,6 +4,27 @@
 @Character = new Mongo.Collection 'characters'
 @Race = new Mongo.Collection 'races'
 
+@spellIndex = new EasySearch.Index
+  collection: Spell
+  fields: ['name'] #, 'book.name', 'classes', 'components', 'school', 'level'
+  engine: new EasySearch.MongoDB
+      selector: (searchObject, options, aggregation) ->
+        selector = @.defaultConfiguration().selector(searchObject, options, aggregation)
+
+        classes = options.search.props.classes
+        level = options.search.props.level
+
+        if classes != ''
+          selector.classes = classes
+        if level != ''
+          selector.level = level*1
+
+        return selector
+      sort: (searchObject, options) ->
+        sort = {}
+        sort[options.search.props.sort] = 1
+        return sort
+
 Class.friendlySlugs 'name'
 Spell.friendlySlugs 'name'
 
