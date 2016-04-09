@@ -53,3 +53,6 @@ Meteor.publish 'spell', (slug) ->
 
 Meteor.publish 'spellbookSpell', (characterId, slug) ->
   Spellbook.find { characterId: characterId, slug: slug }
+
+Meteor.publish 'spellbook', ->
+  Spellbook.find { userId: @userId }

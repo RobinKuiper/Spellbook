@@ -4,6 +4,8 @@ Tracker.autorun ->
   spellSlug.set FlowRouter.getParam('spellSlug')
 
 Template.addToSpellbookModal.onRendered ->
+  Meteor.subscribe 'spellbook'
+
   $('#addToSpellbookModal').modal({
     onHide: -> Session.set 'showAddToSpellbookModal', false
   }).modal 'show'
@@ -25,9 +27,7 @@ Template.addToSpellbookModal.onRendered ->
 Template.addToSpellbookModal.helpers
   characters: -> Character.find {}
   inSpellbook: (characterId) ->
-    if spell = Spell.findOne({ slug: spellSlug.get() })
-      spellId = spell._id
-      if Spellbook.findOne { spellId: spellId, characterId: characterId }
-        return 'item disabled'
-      else
-        return 'item'
+    if Spellbook.findOne { slug: spellSlug.get(), characterId: characterId }
+      return 'item disabled'
+    else
+      return 'item'

@@ -29,12 +29,12 @@ Template.spells.onRendered ->
   level.set ''
   sortBy.set 'name'
 
-  $('#levelDropdown').dropdown
+  $('#levelDropdown').dropdown('set selected', filters.level).dropdown
     onChange: (value) ->
       level.set if value == 'all' then '' else value
       filters.level = if value == 'all' then '' else value
 
-  $('#classDropdown').dropdown
+  $('#classDropdown').dropdown('set selected', filters.classes).dropdown
     onChange: (value) ->
       C.set if value == 'all' then '' else value
       filters.classes = if value == 'all' then '' else value
