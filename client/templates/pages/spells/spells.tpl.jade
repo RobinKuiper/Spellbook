@@ -10,7 +10,37 @@ if isCharacter
                 button#mySpellsButton.ui.big.fluid.active.button My Spells
             .column
                 button#allSpellsButton.ui.big.fluid.button All Spells
-nav.ui.three.column.grid
+
+.ui.four.buttons
+    button#classDropdown.ui.fluid.dropdown.button
+        .text All Classes
+        i.dropdown.icon
+        .menu
+            .item(data-value='all') All Classes
+            each c in classes
+                .item(data-value=c.name) #{c.name}
+
+    button#levelDropdown.ui.fluid.dropdown.button
+        .text All Levels
+        i.dropdown.icon
+        .menu
+            .item(data-value='all') All Levels
+            each level in levels
+                .item(data-value=level)= formatLevel(level)
+
+    button#sortDropdown.ui.fluid.dropdown.button
+        .text Sort: Name
+        i.dropdown.icon
+        .menu
+            .item(data-value='name') Sort: Name
+            .item(data-value='level') Sort: Level
+            .item(data-value='range') Sort: Range
+
+    button#moreFilters.ui.fluid.button
+        i.filter.icon
+        | More Filters
+
+//nav.ui.three.column.grid
     //unless isCharacter
     .column
         //select#classDropdown.ui.fluid.dropdown(multiple="")
@@ -48,8 +78,6 @@ nav.ui.three.column.grid
                 .item(data-value='name') Sort: Name
                 .item(data-value='level') Sort: Level
                 .item(data-value='range') Sort: Range
-
-button#moreFilters.ui.button More Filters
 
 if spells
     #alphabetSidebar.ui.secondary.vertical.menu

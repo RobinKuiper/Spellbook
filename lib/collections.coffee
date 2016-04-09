@@ -34,8 +34,6 @@ options =
       if extra.indexOf 'Bonus Action' != -1
         selector.castingTime = '1 Bonus Action'
 
-    console.log selector
-
     return selector
   sort: (searchObject, options) ->
     sort = {}
@@ -44,12 +42,12 @@ options =
 
 @spellIndex = new EasySearch.Index
   collection: Spell
-  fields: ['name'] #, 'book.name', 'classes', 'components', 'school', 'level'
+  fields: ['name']
   engine: new EasySearch.MongoDB options
 
 @spellbookIndex = new EasySearch.Index
   collection: Spellbook
-  fields: ['name'] #, 'book.name', 'classes', 'components', 'school', 'level'
+  fields: ['name']
   engine: new EasySearch.MongoDB options
 
 Class.friendlySlugs 'name'
