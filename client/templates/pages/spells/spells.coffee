@@ -32,10 +32,12 @@ Template.spells.onRendered ->
   $('#levelDropdown').dropdown
     onChange: (value) ->
       level.set if value == 'all' then '' else value
+      filters.level = if value == 'all' then '' else value
 
   $('#classDropdown').dropdown
     onChange: (value) ->
       C.set if value == 'all' then '' else value
+      filters.classes = if value == 'all' then '' else value
 
   $('#sortDropdown').dropdown
     onChange: (value) ->
@@ -62,24 +64,21 @@ Template.spells.helpers
         group.done.push spell.level
         return spell.level
   spells: ->
+    options =
+      skip: 0
+      limit: limit.get()
+      props:
+        classes: filters.classes
+        level: filters.level
+        sources: filters.sources
+        components: filters.components
+        ranges: filters.ranges
+        extra: filters.extra
+        sort: sortBy.get()
     if type.get() == 'all'
-      spellIndex.search(Session.get('search'), {
-        skip: 0
-        limit: limit.get()
-        props:
-          classes: C.get()
-          level: level.get()
-          sort: sortBy.get()
-      }).fetch()
+      spellIndex.search(Session.get('search'), options).fetch()
     else if type.get() == 'my'
-      spellbookIndex.search(Session.get('search'), {
-        skip: 0
-        limit: limit.get()
-        props:
-          classes: C.get()
-          level: level.get()
-          sort: sortBy.get()
-      }).fetch()
+      spellbookIndex.search(Session.get('search'), options).fetch()
   spells2: ->
     if(type.get() == 'my')
       filter = { sort: {} }

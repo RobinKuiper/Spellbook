@@ -16,20 +16,7 @@ Template.registerHelper 'formatLevel', (level) ->
 Template.registerHelper 'formatSmallLevel', (level) ->
   return if level == 0 then 'c' else level
 
-Template.registerHelper 'formatRange', (range) ->
-  if range == 0
-    return 'Self'
-  else if range == 5
-    return 'Touch'
-  else if range == -1
-    return 'Sight'
-  else if range == -1000
-    return 'Unlimited'
-  else if range == 5280
-    return '1 Mile'
-  else
-    return range + ' feet'
-
+Template.registerHelper 'formatRange', (range) -> utils.format.range(range)
 
 utils.back = ->
     route = if Session.get 'previousRoute' == '' then Settings.homeRoute else Session.get 'previousRoute'

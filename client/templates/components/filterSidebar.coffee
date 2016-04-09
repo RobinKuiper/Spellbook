@@ -1,10 +1,3 @@
-f =
-  sources: []
-  components: []
-  ranges: []
-  extra: []
-filters = new ReactiveObject(f)
-
 Template.filterSidebar.onRendered ->
   $('.ui.checkbox').checkbox()
 
@@ -22,6 +15,7 @@ toggleFilter = (target) ->
     $(target).removeClass 'active'
 
   else
+    console.log listId
     filters[listId].push item
     $(target).children('i').removeClass('plus').addClass('red').addClass('remove')
     $(target).addClass 'active'

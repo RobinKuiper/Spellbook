@@ -4,47 +4,53 @@
 @Character = new Mongo.Collection 'characters'
 @Race = new Mongo.Collection 'races'
 
+options =
+  selector: (searchObject, options, aggregation) ->
+    selector = @.defaultConfiguration().selector(searchObject, options, aggregation)
+
+    props = options.search.props
+
+    classes = props.classes
+    level = props.level
+    sources = props.sources
+    components = props.components
+    ranges = props.ranges
+    extra = props.extra
+
+    if classes != ''
+      selector.classes = classes
+    if level != ''
+      selector.level = level*1
+    if sources.length > 0
+      selector['book.name'] = {}
+      selector['book.name'].$in = sources
+    if components.length > 0
+      selector.components = {}
+      selector.components.$in = components
+    if ranges.length > 0
+      selector.range = {}
+      selector.range.$in = ranges
+    if extra.length > 0
+      if extra.indexOf 'Bonus Action' != -1
+        selector.castingTime = '1 Bonus Action'
+
+    console.log selector
+
+    return selector
+  sort: (searchObject, options) ->
+    sort = {}
+    sort[options.search.props.sort] = 1
+    return sort
+
 @spellIndex = new EasySearch.Index
   collection: Spell
   fields: ['name'] #, 'book.name', 'classes', 'components', 'school', 'level'
-  engine: new EasySearch.MongoDB
-      selector: (searchObject, options, aggregation) ->
-        selector = @.defaultConfiguration().selector(searchObject, options, aggregation)
-
-        classes = options.search.props.classes
-        level = options.search.props.level
-
-        if classes != ''
-          selector.classes = classes
-        if level != ''
-          selector.level = level*1
-
-        return selector
-      sort: (searchObject, options) ->
-        sort = {}
-        sort[options.search.props.sort] = 1
-        return sort
+  engine: new EasySearch.MongoDB options
 
 @spellbookIndex = new EasySearch.Index
   collection: Spellbook
   fields: ['name'] #, 'book.name', 'classes', 'components', 'school', 'level'
-  engine: new EasySearch.MongoDB
-    selector: (searchObject, options, aggregation) ->
-      selector = @.defaultConfiguration().selector(searchObject, options, aggregation)
-
-      classes = options.search.props.classes
-      level = options.search.props.level
-
-      if classes != ''
-        selector.classes = classes
-      if level != ''
-        selector.level = level*1
-
-      return selector
-    sort: (searchObject, options) ->
-      sort = {}
-      sort[options.search.props.sort] = 1
-      return sort
+  engine: new EasySearch.MongoDB options
 
 Class.friendlySlugs 'name'
 Spell.friendlySlugs 'name'

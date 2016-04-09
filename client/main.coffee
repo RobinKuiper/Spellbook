@@ -3,6 +3,15 @@ Meteor.startup ->
   Session.setDefault 'showAddToSpellbookModal', false
   Session.setDefault 'spellToAdd', ''
 
+  f =
+    sources: []
+    components: []
+    ranges: []
+    extra: []
+    level: ''
+    classes: ''
+  @filters = new ReactiveObject(f)
+
 Tracker.autorun ->
   if Session.get 'showSignUpModal'
     $('#signUpModal').modal({
