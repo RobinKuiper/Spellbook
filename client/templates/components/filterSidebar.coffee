@@ -4,6 +4,8 @@ Template.filterSidebar.onRendered ->
   $('#filterSidebar .item').click (e) ->
     toggleFilter e.currentTarget
 
+  $('#clearFilters').click -> clearFilter()
+
 toggleFilter = (target) ->
 
   listId = $(target).closest('.list').attr('id')
@@ -20,4 +22,12 @@ toggleFilter = (target) ->
     $(target).children('i').removeClass('plus').addClass('red').addClass('remove')
     $(target).addClass 'active'
 
-  console.log filters[listId]
+clearFilter = ->
+  target = $('#filterSidebar .item')
+  $(target).children('i').removeClass('red').removeClass('remove').addClass('plus')
+  $(target).removeClass 'active'
+
+  filters.sources     = []
+  filters.components  = []
+  filters.ranges      = []
+  filters.extra       = []
