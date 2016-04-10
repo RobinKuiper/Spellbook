@@ -8,6 +8,8 @@ type = new ReactiveVar 'all'
 limit = new ReactiveVar 50
 #group = { done: [] }
 infiniteScroll = false
+###counter = 0
+spellCount = 50###
 
 Template.spells.onCreated ->
   Session.set 'characterId', if Character.findOne FlowRouter.getParam('characterId') then FlowRouter.getParam('characterId') else ''
@@ -79,29 +81,16 @@ Template.spells.helpers
       spellIndex.search(Session.get('search'), options).fetch()
     else if type.get() == 'my'
       spellbookIndex.search(Session.get('search'), options).fetch()
-  spells2: ->
-    if(type.get() == 'my')
-      filter = { sort: {} }
-      filter.sort[sortBy.get()] = 1
-
-      select = {}
-      select.characterId = Session.get 'characterId'
-      if level.get() != ''
-        select['spell.level'] = level.get()*1
-      if C.get() != ''
-        select['spell.classes'] = C.get()
-      spellbook = Spellbook.find select, filter
-      spells = []
-      spellbook.forEach (spell) ->
-        spells.push spell.spell
-
-      return spells
-    else
-      filter = { sort: {} }
-      filter.sort[sortBy.get()] = 1
-      Spell.find {}, filter
   levels: -> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   letters: -> 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split ''
+  ###addAdsense: ->
+    counter++
+    console.log spellCount
+    if ((counter % Math.round((spellCount / 1.20))) == 0)
+      Meteor.setTimeout ->
+        Adsense.add('.adsense')
+      , 1000
+      return true###
 
 Template.spells.events
   'click #allSpellsButton': ->

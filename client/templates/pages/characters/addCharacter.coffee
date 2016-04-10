@@ -1,17 +1,22 @@
 level = new ReactiveVar()
 C = new ReactiveVar()
 race = new ReactiveVar()
+character = null
+
+Template.addCharacter.onCreated ->
+  if FlowRouter.getParam('characterId')
+    character = Character.findOne FlowRouter.getParam('characterId')
 
 Template.addCharacter.onRendered ->
-  $('#levelDropdown').dropdown
+  $('#levelDropdown').dropdown('set selected', character.level).dropdown
     onChange: (value) ->
       level.set value
 
-  $('#classDropdown').dropdown
+  $('#classDropdown').dropdown('set selected', character.class).dropdown
     onChange: (value) ->
       C.set value
 
-  $('#raceDropdown').dropdown
+  $('#raceDropdown').dropdown('set selected', character.race).dropdown
     onChange: (value) ->
       race.set value
 
@@ -19,6 +24,7 @@ Template.addCharacter.helpers
   classes: -> Class.find {}
   races: -> Race.find {}
   levels: -> (num for num in [1..20])
+  character: -> character
 
 Template.addCharacter.events
   'submit form': (e) ->

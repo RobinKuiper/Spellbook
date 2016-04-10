@@ -7,6 +7,8 @@ Template.header.helpers
   isHomeRoute: -> FlowRouter.getRouteName() == Settings.homeRoute
   isBackRoute: -> (FlowRouter.getRouteName() != Settings.homeRoute && FlowRouter.getRouteName() != 'characters')
   isCharactersRoute: -> FlowRouter.getRouteName() == 'characters'
+  isCharacterRoute: -> FlowRouter.getRouteName() == 'characterSpells'
+  characterId: -> FlowRouter.getParam('characterId')
   showSearch: -> showSearch.get()
   query: -> Session.get 'search'
 
