@@ -1,4 +1,7 @@
 Template.mainLayout.onRendered ->
+  $(window).on 'touchmove', ->
+    $('.ui.sidebar').sidebar('hide')
+
   $('.ui.sidebar')
     .sidebar({
       #context: '#content'

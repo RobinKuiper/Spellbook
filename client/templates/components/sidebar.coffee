@@ -1,5 +1,5 @@
 Template.sidebar.onRendered ->
-  $('.sidebar a').click ->
+  $('#menuSidebar a').click ->
     $('.ui.sidebar').sidebar('hide')
 
 Template.sidebar.events
