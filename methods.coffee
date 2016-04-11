@@ -11,6 +11,11 @@ Meteor.methods
       s.characterId = characterId
       s.spellId = spellId
 
+      if Meteor.isClient
+        analytics.track 'Add Spell',
+          spell: s.name
+          characterId: characterId
+
       Spellbook.insert s, (err, result) ->
         if err
           console.log err
@@ -18,6 +23,11 @@ Meteor.methods
           return result
 
   removeSpell: (spellId, characterId) ->
+    if Meteor.isClient
+      analytics.track 'Add Spell',
+        spellId: spellId
+        characterId: characterId
+
     Spellbook.remove { userId: @userId, spellId: spellId, characterId: characterId }, (err, result) ->
       if err
         throw new Meteor.Error err

@@ -43,6 +43,7 @@ mrt:reactive-object
 juliancwirko:s-alert
 meteorhacks:kadira
 kadira:debug
+okgrow:analytics
 
 # MOBILE
 mobile-experience           # Packages for a great mobile UX
