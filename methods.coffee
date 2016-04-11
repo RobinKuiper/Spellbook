@@ -50,6 +50,9 @@ Meteor.methods
   countCharacters: -> Character.find().count()
   countUsers: -> Meteor.users.find().count()
   hideAdsense: ->
+    if inDevelopment
+      return true
+
     if @userId
       if user = Meteor.users.findOne @userId
         if user.hideAdsense
