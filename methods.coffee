@@ -39,3 +39,11 @@ Meteor.methods
   countSpells: -> Spell.find().count()
   countCharacters: -> Character.find().count()
   countUsers: -> Meteor.users.find().count()
+  hideAdsense: ->
+    if @userId
+      if user = Meteor.users.findOne @userId
+        if user.hideAdsense
+          return true
+        else
+          return false
+    return false

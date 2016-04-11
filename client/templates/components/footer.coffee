@@ -1,2 +1,9 @@
 Template.footer.onRendered ->
-  Adsense.add 'footer'
+  Meteor.call 'hideAdsense', (err, hide) ->
+    if err
+      console.log err
+    else
+      if !hide
+        Adsense.add 'footer'
+      else
+        $('footer').remove()
