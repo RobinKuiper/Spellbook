@@ -1,5 +1,6 @@
 {
   "public": {
+    "inProduction": true,
     "analyticsSettings": {
       "Google Analytics": {
         "trackingId": "UA-69733203-3"

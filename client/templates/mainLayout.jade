@@ -25,13 +25,11 @@ head
 template(name='mainLayout')
     +sAlert
 
-
     +sidebar
     +filterSidebar
 
+    +header
     .pusher
-
-        +header
         +Template.dynamic(template=content)
 
     +signUpModal

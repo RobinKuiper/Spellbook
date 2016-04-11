@@ -20,7 +20,6 @@ Template.spells.onCreated ->
     if FlowRouter.getRouteName() == 'home'
       $(window).on 'scroll', (e) ->
         if $(window).scrollTop() + $(window).height() == $(document).height()
-          console.log 'bottom'
           infiniteScroll = true
           limit.set limit.get()+50
     else

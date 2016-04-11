@@ -1,28 +1,28 @@
 header.ui.huge.inverted.blue.menu
-    unless showSearch
-        if isBackRoute
-            a#backButton.item
-                i.arrow.left.icon
-        else
-            a#sidebarButton.item
-                i.sidebar.icon
-        .header.item #{title}
-        if isHomeRoute
-            .right.menu
+    if isBackRoute
+        a#backButton.item
+            i.arrow.left.icon
+    else
+        a#sidebarButton.item
+            i.sidebar.icon
+    .header.item #{title}
+    if isHomeRoute
+        .right.menu
+            if showSearch
+                .ui.category.search.item
+                    .ui.transparant.fluid.icon.input
+                        input#searchInput(type='text' placeholder='Search' value=query)
+                        i.search.link.icon
+            else
                 a#searchButton.item
                     i.search.icon
 
-        if isCharactersRoute
-            .right.menu
-                a#addCharacterButton.item(href='/characters/add')
-                    i.add.icon
+    if isCharactersRoute
+        .right.menu
+            a#addCharacterButton.item(href='/characters/add')
+                i.add.icon
 
-        if isCharacterRoute
-            .right.menu
-                a#editCharacterButton.item(href='/characters/#{characterId}/edit')
-                    i.edit.icon
-    else
-        .ui.category.search.item
-            .ui.transparant.icon.input
-                input#searchInput(type='text' placeholder='Search' value=query)
-                i.search.link.icon
+    if isCharacterRoute
+        .right.menu
+            a#editCharacterButton.item(href='/characters/#{characterId}/edit')
+                i.edit.icon

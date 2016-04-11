@@ -18,6 +18,8 @@ Template.registerHelper 'formatSmallLevel', (level) ->
 
 Template.registerHelper 'formatRange', (range) -> utils.format.range(range)
 
+Template.registerHelper 'isRoute', (name) -> FlowRouter.getRouteName() == name
+
 utils.back = ->
     route = if Session.get 'previousRoute' == '' then Settings.homeRoute else Session.get 'previousRoute'
     FlowRouter.go route
