@@ -46,6 +46,18 @@ Meteor.methods
     else
       throw new Meteor.Error 'Not allowed with this data.'
 
+  editCharacter: (char) ->
+    if(char.name.length > 2)
+      char.userId = @userId
+      Character.update { _id: char._id, userId: @userId }, { $set: char }, (err, result) ->
+        console.log result
+        if err
+          throw new Meteor.Error err
+        else
+          return result
+    else
+      throw new Meteor.Error 'Not allowed with this data.'
+
   countSpells: -> Spell.find().count()
   countCharacters: -> Character.find().count()
   countUsers: -> Meteor.users.find().count()

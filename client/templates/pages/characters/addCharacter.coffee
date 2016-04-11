@@ -4,19 +4,22 @@ race = new ReactiveVar()
 character = null
 
 Template.addCharacter.onCreated ->
-  if FlowRouter.getParam('characterId')
-    character = Character.findOne FlowRouter.getParam('characterId')
+  if characterId = FlowRouter.getParam('characterId')
+    character = Character.findOne characterId
+    level.set character.level
+    C.set character.class
+    race.set character.race
 
 Template.addCharacter.onRendered ->
-  $('#levelDropdown').dropdown('set selected', character.level).dropdown
+  $('#levelDropdown').dropdown('set selected', if character then character.level else 'Level').dropdown
     onChange: (value) ->
       level.set value
 
-  $('#classDropdown').dropdown('set selected', character.class).dropdown
+  $('#classDropdown').dropdown('set selected',if character then character.class else 'Class').dropdown
     onChange: (value) ->
       C.set value
 
-  $('#raceDropdown').dropdown('set selected', character.race).dropdown
+  $('#raceDropdown').dropdown('set selected', if character then character.race else 'Race').dropdown
     onChange: (value) ->
       race.set value
 
@@ -42,15 +45,24 @@ Template.addCharacter.events
         race: race.get()
         class: C.get()
 
-      Meteor.call 'addCharacter', char, (err, result) ->
-        if err
-          sAlert.error err
-        else
-          if Session.get('spellToAdd') != ''
-            Meteor.call 'addSpell', Session.get('spellToAdd'), result, (err, result) ->
-              if err
-                console.log err
-              else
-                Session.set 'spellToAdd', ''
-          FlowRouter.go '/characters/'+result+'/spells'
+      if character
+        char._id = character._id
+
+        Meteor.call 'editCharacter', char, (err, result) ->
+          if err
+            sAlert.error err
+          else
+            FlowRouter.go '/characters/'+char._id+'/spells'
+      else
+        Meteor.call 'addCharacter', char, (err, result) ->
+          if err
+            sAlert.error err
+          else
+            if Session.get('spellToAdd') != ''
+              Meteor.call 'addSpell', Session.get('spellToAdd'), result, (err, result) ->
+                if err
+                  console.log err
+                else
+                  Session.set 'spellToAdd', ''
+            FlowRouter.go '/characters/'+result+'/spells'
 
