@@ -24,5 +24,8 @@ header.ui.huge.inverted.blue.menu
 
     if isCharacterRoute
         .right.menu
+            a#characterSheetButton.item(href='/characters/#{characterId}/sheet')
+                i.user.icon
+
             a#editCharacterButton.item(href='/characters/#{characterId}/edit')
                 i.edit.icon

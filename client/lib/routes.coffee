@@ -36,6 +36,11 @@ characterSection.route '/add',
   action: ->
     BlazeLayout.render 'mainLayout', { content: 'addCharacter' }
 
+characterSection.route '/:characterId/sheet',
+  name: 'characterSheet'
+  action: ->
+    BlazeLayout.render 'mainLayout', { content: 'characterSheet' }
+
 characterSection.route '/:characterId/edit',
   name: 'editCharacter'
   action: ->
