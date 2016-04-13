@@ -1,4 +1,51 @@
-level = new ReactiveVar()
+Template.addCharacter.helpers
+  omittedFields: -> [
+    'userId'
+    'level'
+    'initiative'
+    'exp'
+    'health.current'
+    'health.temp'
+    'hitDice'
+    'hitDice.total'
+    'hitDice.current'
+    'currency'
+    'abilities.strength.modifier'
+    'abilities.dexterity.modifier'
+    'abilities.constitution.modifier'
+    'abilities.intelligence.modifier'
+    'abilities.wisdom.modifier'
+    'abilities.charisma.modifier'
+    'abilities.strength.save'
+    'abilities.dexterity.save'
+    'abilities.constitution.save'
+    'abilities.intelligence.save'
+    'abilities.wisdom.save'
+    'abilities.charisma.save'
+    'abilities.athletics'
+    'abilities.acrobatics'
+    'abilities.sleightofhand'
+    'abilities.stealth'
+    'abilities.arcana'
+    'abilities.history'
+    'abilities.investigation'
+    'abilities.nature'
+    'abilities.religion'
+    'abilities.animalhandling'
+    'abilities.insight'
+    'abilities.medicine'
+    'abilities.perception'
+    'abilities.survival'
+    'abilities.deception'
+    'abilities.intimidation'
+    'abilities.performance'
+    'abilities.persuasion'
+    'proficiencies.bonus'
+    'createdAt'
+    'updatedAt'
+  ]
+
+###level = new ReactiveVar()
 C = new ReactiveVar()
 race = new ReactiveVar()
 character = null
@@ -64,5 +111,4 @@ Template.addCharacter.events
                   console.log err
                 else
                   Session.set 'spellToAdd', ''
-            FlowRouter.go '/characters/'+result+'/spells'
-
+            FlowRouter.go '/characters/'+result+'/spells'###

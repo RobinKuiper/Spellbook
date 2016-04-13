@@ -20,6 +20,11 @@ Template.registerHelper 'formatRange', (range) -> utils.format.range(range)
 
 Template.registerHelper 'isRoute', (name) -> FlowRouter.getRouteName() == name
 
+Template.registerHelper 'calculateModifier', (score) -> utils.calculate.modifier(score)
+
+Template.registerHelper 'isProficience', (proficiencies, mod, stat) ->
+  return if (proficiencies.indexOf(stat) != -1) then mod + 2 else mod
+
 utils.back = ->
     route = if Session.get 'previousRoute' == '' then Settings.homeRoute else Session.get 'previousRoute'
     FlowRouter.go route

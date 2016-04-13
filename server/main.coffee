@@ -1,2 +1,2 @@
 Meteor.startup ->
-  Migrations.migrateTo(17)
+  Migrations.migrateTo('latest')

@@ -1,5 +1,11 @@
 @utils = {}
 
+utils.string =
+  toUpperCase: (string) -> string.substr(0, 1).toUpperCase() + string.substr(1)
+
+utils.calculate =
+  modifier: (score) -> Math.floor (score - 10) / 2
+
 utils.RegExp =
   escape: (s) -> s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
 

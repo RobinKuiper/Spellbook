@@ -1,131 +1,218 @@
-.ui.column.grid
-    .row
+#sheetTabs.ui.top.attached.tabular.menu
+    a.active.item(data-tab='core') Core
+    a.item(data-tab='proficiencies') Proficiencies
+    a.item(data-tab='equipment') Equipment
+.ui.bottom.attached.active.tab.segment(data-tab='core')
+    .ui.three.cards
+        .blue.card
+            .center.aligned.content Initiative
+                .header #{character.initiative}
+        .card
+            .center.aligned.content HP
+                .header #{character.health.current}/#{character.health.max}
+            .ui.bottom.attached.mini.buttons
+                #increaseHP.ui.green.button
+                    i.plus.icon
+                #decreaseHP.ui.red.button
+                    i.minus.icon
+        .blue.card
+            .center.aligned.content AC
+                .header #{character.ac}
+
+
+    .ui.two.green.cards
+        .card
+            .center.aligned.content
+                .header Strength
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.strength.score}
+                    .column Mod
+                        .ui.header #{character.abilities.strength.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.strength.save}
+        .card
+            .center.aligned.content
+                .header Intelligence
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.intelligence.score}
+                    .column Mod
+                        .ui.header #{character.abilities.intelligence.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.intelligence.save}
+
+    .ui.two.green.cards
+        .card
+            .center.aligned.content
+                .header Dexterity
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.dexterity.score}
+                    .column Mod
+                        .ui.header #{character.abilities.dexterity.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.dexterity.save}
+        .card
+            .center.aligned.content
+                .header Wisdom
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.wisdom.score}
+                    .column Mod
+                        .ui.header #{character.abilities.wisdom.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.wisdom.save}
+
+    .ui.two.green.cards
+        .card
+            .center.aligned.content
+                .header Constitution
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.constitution.score}
+                    .column Mod
+                        .ui.header #{character.abilities.constitution.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.constitution.save}
+        .card
+            .center.aligned.content
+                .header Charisma
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.charisma.score}
+                    .column Mod
+                        .ui.header #{character.abilities.charisma.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.charisma.save}
+
+    .ui.three.cards
+        #hitDice.blue.card
+            .center.aligned.content Hit Dice
+                .header
+                    each dice in character.hitDice.current
+                        | #{dice.amount}#{dice.dice}
+                        br
+        .blue.card
+            .center.aligned.content Proficiency
+                .header #{character.proficiencies.bonus}
+        .blue.card
+            .center.aligned.content Level
+                .header #{character.level}
+
+    .ui.divider
+
+    .ui.huge.fluid.buttons
+        #longRest.ui.button Long Rest
+        #shortRest.ui.button Short Rest
+
+.ui.bottom.attached.tab.segment(data-tab='proficiencies')
+    .ui.two.column.grid
         .column
-            .ui.header #{character.name}
+            .ui.header Strength #{character.abilities.strength.modifier}
+            .ui.middle.aligned.divided.list
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.athletics}
+                    .content Athletics
 
-#sheetAccordion.ui.fluid.styled.accordion
-    .active.title
-        i.dropdown.icon
-        | Core
-    .active.content
-        .ui.six.cards
-            .card
-                .center.aligned.content
-                    .content Strength
-                    .header 14
-                .floating.ui.red.circular.label +2
+            .ui.header Dexterity #{character.abilities.dexterity.modifier}
+            .ui.middle.aligned.divided.list
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.acrobatics}
+                    .content Acrobatics
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.sleightofhand}
+                    .content Sleight of Hand
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.stealth}
+                    .content Stealth
 
-            .card
-                .center.aligned.content
-                    .content Dexterity
-                    .header 14
-                .floating.ui.red.circular.label +2
+            .ui.header Intelligence #{character.abilities.intelligence.modifier}
+            .ui.middle.aligned.divided.list
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.arcana}
+                    .content Arcana
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.history}
+                    .content History
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.investigation}
+                    .content Investigation
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.nature}
+                    .content Nature
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.religion}
+                    .content Religion
 
-            .card
-                .center.aligned.content
-                    .content Constitution
-                    .header 14
-                .floating.ui.red.circular.label +2
+        .column
+            .ui.header Wisdom #{character.abilities.wisdom.modifier}
+            .ui.middle.aligned.divided.list
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.animalhandling}
+                    .content Animal Handling
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.insight}
+                    .content Insight
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.medicine}
+                    .content Medicine
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.perception}
+                    .content Perception
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.survival}
+                    .content Survival
 
-            .card
-                .center.aligned.content
-                    .content Intelligence
-                    .header 14
-                .floating.ui.red.circular.label +2
+            .ui.header Charisma #{character.abilities.charisma.modifier}
+            .ui.middle.aligned.divided.list
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.deception}
+                    .content Deception
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.intimidation}
+                    .content Intimidation
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.performance}
+                    .content Performance
+                .item
+                    .right.floated.content
+                        .ui.label #{character.abilities.persuasion}
+                    .content Persuasion
 
-            .card
-                .center.aligned.content
-                    .content Wisdom
-                    .header 14
-                .floating.ui.red.circular.label +2
-
-            .card
-                .center.aligned.content
-                    .content Charisma
-                    .header 14
-                .floating.ui.red.circular.label +2
-
-            .ui.two.column.grid
-                .eight.wide.column
-                    table.ui.fluid.table
-                        tr
-                            td Strength
-                            td 2
-                        tr
-                            td Dexterity
-                            td 1
-                        tr
-                            td Constitution
-                            td 2
-                        tr
-                            td Intelligence
-                            td 1
-                        tr
-                            td Wisdom
-                            td 2
-                        tr
-                            td Charisma
-                            td 1
-
-                .eight.wide.column
-                    table.ui.fluid.table
-                        tr
-                            td Acrobatics
-                            td 2
-                        tr
-                            td Animal Handling
-                            td 1
-                        tr
-                            td Arcana
-                            td 2
-                        tr
-                            td Athletics
-                            td 1
-                        tr
-                            td Deception
-                            td 2
-                        tr
-                            td History
-                            td 1
-                        tr
-                            td Insight
-                            td 2
-                        tr
-                            td Intimidation
-                            td 1
-                        tr
-                            td Investigation
-                            td 2
-                        tr
-                            td Medicine
-                            td 1
-                        tr
-                            td Nature
-                            td 2
-                        tr
-                            td Perception
-                            td 1
-                        tr
-                            td Performance
-                            td 2
-                        tr
-                            td Persuasion
-                            td 1
-                        tr
-                            td Religion
-                            td 2
-                        tr
-                            td Sleight of Hand
-                            td 1
-                        tr
-                            td Stealth
-                            td 2
-                        tr
-                            td Survival
-                            td 1
-
-    .title
-        i.dropdown.icon
-        | Attacks
-    .content
-        p Attacks
+.ui.bottom.attached.tab.segment(data-tab='equipment')
+    .ui.one.column.grid
+        .center.aligned.column
+            .ui.horizontal.list
+                .item
+                    .header #{character.currency.copper}
+                    .content CP
+                .item
+                    .header #{character.currency.silver}
+                    .content SP
+                .item
+                    .header #{character.currency.electrum}
+                    .content EP
+                .item
+                    .header #{character.currency.gold}
+                    .content GP
+                .item
+                    .header #{character.currency.platinum}
+                    .content PP

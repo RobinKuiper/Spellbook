@@ -1,0 +1,42 @@
+#addCharacter.ui.container
+    form.ui.form
+        .field
+            input(type='text' name='name' value=character.name placeholder='Name')
+
+        .fields
+            .field
+                #classDropdown.ui.dropdown
+                    .text Class
+                    i.dropdown.icon
+                    .menu
+                        each c in classes
+                            .item(data-value=c.name) #{c.name}
+
+            .field
+                #raceDropdown.ui.dropdown
+                    .text Race
+                    i.dropdown.icon
+                    .menu
+                        each race in races
+                            .item(data-value=race.name) #{race.name}
+
+            .field
+                #levelDropdown.ui.dropdown
+                    .text Level
+                    i.dropdown.icon
+                    .menu
+                        each level in levels
+                            .item(data-value=level)= formatLevel(level)
+
+        //.field
+            input(type='number' name='spellcastingAbilityMod' placeholder='Spellcasting Ability Mod')
+
+        //.field
+            input(type='number' name='proficiency' placeholder='Proficiency Bonus')
+
+        .field
+            button.ui.fluid.huge.green.button
+                i.save.icon
+                | Save
+
++footer

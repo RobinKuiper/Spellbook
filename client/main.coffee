@@ -12,6 +12,11 @@ Meteor.startup ->
     classes: ''
   @filters = new ReactiveObject(f)
 
+  AutoForm.setDefaultTemplate("semanticUI")
+
+  if !Meteor.settings.public.inProduction
+    SimpleSchema.debug = true
+
 Tracker.autorun ->
   if Session.get 'showSignUpModal'
     $('#signUpModal').modal({
