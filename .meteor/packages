@@ -36,6 +36,8 @@ todda00:friendly-slugs
 mongo                       # The database Meteor supports right now
 percolate:migrations
 easy:search
+aldeed:autoform
+fabienb4:autoform-semantic-ui
 
 # UTILS
 reactive-var
@@ -44,6 +46,7 @@ juliancwirko:s-alert
 meteorhacks:kadira
 kadira:debug
 okgrow:analytics
+kevohagan:sweetalert
 
 # MOBILE
 mobile-experience           # Packages for a great mobile UX
