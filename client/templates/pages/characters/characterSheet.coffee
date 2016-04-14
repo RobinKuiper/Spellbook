@@ -6,11 +6,17 @@ Template.characterSheet.onRendered ->
 Template.characterSheet.helpers
   character: -> character = Character.findOne FlowRouter.getParam('characterId')
 
+decreaseHPinterval = null
+increaseHPinterval = null
 Template.characterSheet.events
-  'click #increaseHP': ->
-    if character.health.current < character.health.max
-      Character.update character._id, { $inc: 'health.current': 1 }
-  'click #decreaseHP': -> Character.update character._id, { $inc: 'health.current': -1 }
+  'mousedown #increaseHP': (e) ->
+    increaseHP()
+    increaseHPinterval = Meteor.setInterval increaseHP, 200
+  'mouseup #increaseHP': -> Meteor.clearInterval(increaseHPinterval)
+  'mousedown #decreaseHP': ->
+    decreaseHP()
+    decreaseHPinterval = Meteor.setInterval decreaseHP, 200
+  'mouseup #decreaseHP': -> Meteor.clearInterval(decreaseHPinterval)
 
   'click #shortRest': ->
     currentHitDices = character.hitDice.current
@@ -45,3 +51,10 @@ Template.characterSheet.events
     ,
       ->
         sAlert.success 'Used!'
+
+increaseHP = ->
+  if character.health.current < character.health.max
+    Character.update character._id, { $inc: 'health.current': 1 }
+
+decreaseHP = ->
+  Character.update character._id, { $inc: 'health.current': -1 }

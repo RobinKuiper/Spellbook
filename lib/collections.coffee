@@ -1,3 +1,5 @@
+#if (this.isInsert && (!this.isSet || this.value.length === 0) {
+
 @Spell = new Mongo.Collection 'spells'
 @Class = new Mongo.Collection 'classes'
 @Spellbook = new Mongo.Collection 'spellbooks'
