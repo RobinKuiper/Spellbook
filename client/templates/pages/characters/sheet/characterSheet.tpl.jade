@@ -1,0 +1,12 @@
+#sheetTabs.ui.top.attached.tabular.menu
+    a.active.item(data-tab='core') Core
+    a.item(data-tab='proficiencies') Proficiencies
+    a.item(data-tab='equipment') Equipment
+.ui.bottom.attached.active.tab.segment(data-tab='core')
+    +sheetCore
+
+.ui.bottom.attached.tab.segment(data-tab='proficiencies')
+    +sheetProficiencies
+
+.ui.bottom.attached.tab.segment(data-tab='equipment')
+    +sheetEquipment

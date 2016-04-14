@@ -1,0 +1,113 @@
+if character
+    .ui.three.cards
+        .blue.card
+            .center.aligned.content Initiative
+                .header #{character.initiative}
+        .card
+            .center.aligned.content HP
+                .header #{character.health.current}/#{character.health.max}
+            .ui.bottom.attached.mini.buttons
+                #increaseHP.ui.green.button
+                    i.plus.icon
+                #decreaseHP.ui.red.button
+                    i.minus.icon
+        .blue.card
+            .center.aligned.content AC
+                .header #{character.ac}
+
+
+    .ui.two.green.cards
+        .card
+            .center.aligned.content
+                .header Strength
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.strength.score}
+                    .column Mod
+                        .ui.header #{character.abilities.strength.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.strength.save}
+        .card
+            .center.aligned.content
+                .header Intelligence
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.intelligence.score}
+                    .column Mod
+                        .ui.header #{character.abilities.intelligence.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.intelligence.save}
+
+    .ui.two.green.cards
+        .card
+            .center.aligned.content
+                .header Dexterity
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.dexterity.score}
+                    .column Mod
+                        .ui.header #{character.abilities.dexterity.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.dexterity.save}
+        .card
+            .center.aligned.content
+                .header Wisdom
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.wisdom.score}
+                    .column Mod
+                        .ui.header #{character.abilities.wisdom.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.wisdom.save}
+
+    .ui.two.green.cards
+        .card
+            .center.aligned.content
+                .header Constitution
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.constitution.score}
+                    .column Mod
+                        .ui.header #{character.abilities.constitution.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.constitution.save}
+        .card
+            .center.aligned.content
+                .header Charisma
+                .ui.three.column.grid
+                    .column Score
+                        .ui.header #{character.abilities.charisma.score}
+                    .column Mod
+                        .ui.header #{character.abilities.charisma.modifier}
+                    .column Save
+                        .ui.header #{character.abilities.charisma.save}
+
+    .ui.three.cards
+        #hitDice.blue.card
+            .center.aligned.content Hit Dice
+                .header
+                    each dice in character.hitDice.current
+                        | #{dice.amount}#{dice.dice}
+                        br
+        .blue.card
+            .center.aligned.content Proficiency
+                .header #{character.proficiencies.bonus}
+        #level.ui.blue.dropdown.card
+            .center.aligned.content Level
+                .header #{character.level}
+            .menu
+                each c in character.classes
+                    .item(data-value=c.name) Level up #{c.name}
+                .dropdown.item New Class
+                    .dropdown.icon
+                    .menu
+                        each c in classes
+                            .item(data-value=c.name) #{c.name}
+
+    .ui.divider
+
+    .ui.huge.fluid.buttons
+        #longRest.ui.button Long Rest
+        #shortRest.ui.button Short Rest
+else
+    .ui.loading.segment

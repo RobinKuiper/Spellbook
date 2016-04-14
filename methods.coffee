@@ -72,3 +72,18 @@ Meteor.methods
         else
           return false
     return false
+
+  increaseClassLevel: (characterId, className) ->
+    if @userId
+      c = Class.findOne { name: className }
+      if Character.findOne { _id: characterId, 'classes.name': className }
+        console.log 'Found class'
+        Character.update { _id: characterId, 'classes.name': className }, { $inc: 'classes.$.level': 1, level: 1 }
+        Character.update { _id: characterId, 'hitDice.total.dice': c.hitDice }, { $inc: 'hitDice.total.$.amount': 1 }
+      else
+        console.log 'Not Found class'
+        if Character.findOne { _id: characterId, 'hitDice.total.dice': c.hitDice }
+          Character.update { _id: characterId, 'hitDice.total.dice': c.hitDice }, { $inc: 'hitDice.total.$.amount': 1 }
+        else
+          Character.update characterId, { $push: 'hitDice.total': { dice: c.hitDice, amount: 1 } }
+        Character.update characterId, { $inc: { level: 1 }, $push: { classes: { name: className, level: 1 } }}
