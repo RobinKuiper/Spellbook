@@ -9,6 +9,7 @@
                     .description
                         = formatLevel(character.level)
                         = character.race
-                        = character.class
+                        each c in character.classes
+                            | #{c.name} (#{c.level}) 
 
 +footer
