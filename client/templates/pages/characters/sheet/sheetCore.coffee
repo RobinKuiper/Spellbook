@@ -20,18 +20,32 @@ Template.sheetCore.helpers
   isSelectedDice: (dice) -> return if(dice == selectedDice.get()) then 'hitDice item selected' else 'hitDice item'
 
 decreaseHPinterval = null
+decreaseHPtimeout = null
 increaseHPinterval = null
+increaseHPtimeout = null
 Template.sheetCore.events
   'click .hitDice': (e) -> selectedDice.set($(e.currentTarget).attr('id'))
     
   'mousedown #increaseHP': ->
     increaseHP(character)
     increaseHPinterval = Meteor.setInterval increaseHP, 200
-  'mouseup #increaseHP': -> Meteor.clearInterval(increaseHPinterval)
+    increaseHPtimeout = Meteor.setTimeout ->
+      Meteor.clearInterval(increaseHPinterval)
+      increaseHPinterval = Meteor.setInterval increaseHP, 100
+    , 1000
+  'mouseup #increaseHP': ->
+    Meteor.clearInterval(increaseHPinterval)
+    Meteor.clearTimeout(increaseHPtimeout)
   'mousedown #decreaseHP': ->
     decreaseHP(character)
     decreaseHPinterval = Meteor.setInterval decreaseHP, 200
-  'mouseup #decreaseHP': -> Meteor.clearInterval(decreaseHPinterval)
+    decreaseHPtimeout = Meteor.setTimeout ->
+      Meteor.clearInterval(decreaseHPinterval)
+      decreaseHPinterval = Meteor.setInterval decreaseHP, 100
+    , 1000
+  'mouseup #decreaseHP': ->
+    Meteor.clearInterval(decreaseHPinterval)
+    Meteor.clearTimeout(decreaseHPtimeout)
 
   'click #shortRest': ->
     if character.hitDice.total.length > 1
