@@ -65,16 +65,23 @@ shortRest = ->
         done = true
 
 longRest = (max) ->
-  currentHitDices = character.hitDice.current
-  totalHitDices = character.hitDice.total
-  if !max
-    for i in [0...currentHitDices.length]
-      if currentHitDices[i].amount < totalHitDices[i].amount
-        increaseWith = totalHitDices[i].amount / 2
-        if currentHitDices[i].amount + increaseWith > totalHitDices[i].amount
-          currentHitDices[i].amount = totalHitDices[i].amount
-        else
-          currentHitDices[i].amount += Math.floor(increaseWith)
+  if character.health.current > 0
+    currentHitDices = character.hitDice.current
+    totalHitDices = character.hitDice.total
+    if !max
+      for i in [0...currentHitDices.length]
+        if currentHitDices[i].amount < totalHitDices[i].amount
+          increaseWith = totalHitDices[i].amount / 2
+          if currentHitDices[i].amount + increaseWith > totalHitDices[i].amount
+            currentHitDices[i].amount = totalHitDices[i].amount
+          else
+            currentHitDices[i].amount += Math.floor(increaseWith)
+    else
+      currentHitDices = totalHitDices
+    Character.update character._id, { $set: { 'hitDice.current': currentHitDices, 'health.current': character.health.max }}
   else
-    currentHitDices = totalHitDices
-  Character.update character._id, { $set: { 'hitDice.current': currentHitDices, 'health.current': character.health.max }}
+    sweetAlert
+      title: "You need to stabalize first."
+      text: "You can't long rest with less then 1 HP."
+      type: "error"
+      timer: 3000
