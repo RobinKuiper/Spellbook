@@ -1,4 +1,5 @@
 character = null
+selectedDice = new ReactiveVar null
 
 Template.sheetCore.onRendered ->
   $('#level').dropdown
@@ -15,10 +16,14 @@ Template.sheetCore.helpers
     for i in [0...character.classes.length]
       classNames.push character.classes[i].name
     Class.find { name: $nin: classNames }
+  isOneDice: -> (character.hitDice.total.length == 1)
+  isSelectedDice: (dice) -> return if(dice == selectedDice.get()) then 'hitDice item selected' else 'hitDice item'
 
 decreaseHPinterval = null
 increaseHPinterval = null
 Template.sheetCore.events
+  'click .hitDice': (e) -> selectedDice.set($(e.currentTarget).attr('id'))
+    
   'mousedown #increaseHP': ->
     increaseHP(character)
     increaseHPinterval = Meteor.setInterval increaseHP, 200
@@ -29,23 +34,24 @@ Template.sheetCore.events
   'mouseup #decreaseHP': -> Meteor.clearInterval(decreaseHPinterval)
 
   'click #shortRest': ->
-    shortRest()
+    if character.hitDice.total.length > 1
+      if selectedDice.get() == null
+        sweetAlert
+          title: "No hit dice selected."
+          text: "Please select an hit dice first by clicking on it."
+          type: "error"
+          timer: 3000
+        return false
+
+    Meteor.call 'useHitDice', character._id, selectedDice.get(), (err) ->
+      if err
+        sweetAlert
+          title: 'Oops...'
+          text: err.error
+          type: 'error'
+          timer: 3000
   'click #longRest': ->
     longRest(false)
-
-  ###'click #level': ->
-    if character.classes.length == 1
-      sweetAlert
-        title: "Level up?"
-        text: "Do you want to add one level?"
-        type: "warning"
-        showCancelButton: true
-        confirmButtonColor: "green"
-        confirmButtonText: "Yes!"
-        closeOnConfirm: true
-      ,
-        ->
-          Character.update character._id, { $inc: 'classes[0].level': 1 }###
 
 increaseHP = ->
   if character.health.current < character.health.max
@@ -53,16 +59,6 @@ increaseHP = ->
 
 decreaseHP = ->
   Character.update character._id, { $inc: 'health.current': -1 }
-
-shortRest = ->
-  currentHitDices = character.hitDice.current
-  done = false
-  for i in [0...currentHitDices.length]
-    if !done
-      if currentHitDices[i].amount > 0
-        currentHitDices[i].amount -= 1
-        Character.update character._id, { $set: 'hitDice.current': currentHitDices }
-        done = true
 
 longRest = (max) ->
   if character.health.current > 0

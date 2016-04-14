@@ -87,3 +87,18 @@ Meteor.methods
         else
           Character.update characterId, { $push: 'hitDice.total': { dice: c.hitDice, amount: 1 } }
         Character.update characterId, { $inc: { level: 1 }, $push: { classes: { name: className, level: 1 } }}
+
+  useHitDice: (characterId, dice) ->
+    if(character = Character.findOne { _id: characterId, userId: @userId })
+      if dice == null
+          if character.hitDice.current[0].amount > 0
+            Character.update characterId, { $inc: 'hitDice.current.0.amount': -1 }
+          else
+            throw new Meteor.Error "You don't have this hit dice remaining."
+      else
+        for i in [0...character.hitDice.current.length]
+          if character.hitDice.current[i].dice == dice
+            if character.hitDice.current[i].amount > 0
+              Character.update { _id: characterId, 'hitDice.current.dice': dice }, { $inc: 'hitDice.current.$.amount': -1 }
+            else
+              throw new Meteor.Error "You don't have this hit dice remaining."

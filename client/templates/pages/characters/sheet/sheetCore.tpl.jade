@@ -86,9 +86,13 @@ if character
         #hitDice.blue.card
             .center.aligned.content Hit Dice
                 .header
-                    each dice in character.hitDice.current
-                        | #{dice.amount}#{dice.dice}
-                        br
+                    if isOneDice
+                        each character.hitDice.current
+                            | #{amount}#{dice}
+                    else
+                        .ui.small.selection.list
+                            each dice in character.hitDice.current
+                                div(id=dice.dice class=isSelectedDice(dice.dice)) #{dice.amount}#{dice.dice}
         .blue.card
             .center.aligned.content Proficiency
                 .header #{character.proficiencies.bonus}
